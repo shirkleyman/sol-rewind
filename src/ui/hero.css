@@ -1,0 +1,58 @@
+/* Picture header for cards */
+.hero { position: relative; height: 96px; margin: -2px -2px 10px; border-radius: 14px; overflow: hidden; background: linear-gradient(160deg, var(--a), var(--b)); display: grid; place-items: center; }
+.hero.sm { height: 68px; }
+.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.hero.has-photo { height: 130px; }
+.hero.has-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 45%, #0a143aaa); }
+.hero-ic { position: relative; z-index: 2; width: 58px; height: 58px; border-radius: 50%; background: #ffffffd9; display: grid; place-items: center; box-shadow: 0 4px 14px #0a143a33; animation: hero-bob 3s ease-in-out infinite; color: var(--b); }
+.hero.dark .hero-ic { background: #ffffff22; color: #fff; box-shadow: 0 0 0 1.5px #ffffff55, 0 4px 14px #0a143a55; }
+.hero-ic .ic svg { width: 30px; height: 30px; stroke-width: 1.8; }
+.hero.has-photo .hero-ic { position: absolute; left: 10px; bottom: 8px; width: 38px; height: 38px; animation: none; }
+.hero.has-photo .hero-ic .ic svg { width: 20px; height: 20px; }
+.hero-label { position: absolute; z-index: 3; left: 56px; bottom: 12px; right: 10px; text-align: left; color: #fff; font-weight: 700; font-size: 14px; text-shadow: 0 1px 4px #0a143a99; }
+.hero.has-photo .hero-label { left: 56px; }
+.hero-fx { position: absolute; inset: 0; z-index: 1; }
+.hero-fx i { position: absolute; display: block; opacity: 0.7; }
+.hero.has-photo .hero-fx { display: none; }
+@keyframes hero-bob { 50% { transform: translateY(-4px); } }
+
+/* stars: twinkling dots */
+.fx-stars i { width: 4px; height: 4px; border-radius: 50%; background: #fff; left: calc(8% + var(--i) * 13%); top: calc(10% + var(--i) * 11%); animation: hero-tw 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * 0.3s); }
+@keyframes hero-tw { 50% { opacity: 0.15; transform: scale(0.6); } }
+
+/* rays: a slow spinning glow behind the symbol, plus sparks */
+.fx-rays .hero-fx::before { content: ''; position: absolute; left: 50%; top: 50%; width: 190px; height: 190px; margin: -95px 0 0 -95px; background: repeating-conic-gradient(from 0deg, #ffffff44 0 10deg, transparent 10deg 30deg); border-radius: 50%; animation: hero-spin 14s linear infinite; }
+.fx-rays i { display: none; }
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+
+/* drops: falling drops */
+.fx-drops i { width: 7px; height: 10px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #ffffffcc; left: calc(6% + var(--i) * 14%); top: -12px; animation: hero-fall 2.2s linear infinite; animation-delay: calc(var(--i) * 0.33s); }
+@keyframes hero-fall { to { transform: translateY(120px); opacity: 0; } }
+
+/* fall: meteors streak across */
+.fx-fall i { width: 3px; height: 16px; border-radius: 3px; background: linear-gradient(#fff, transparent); left: calc(4% + var(--i) * 15%); top: -20px; transform: rotate(20deg); animation: hero-meteor 1.6s linear infinite; animation-delay: calc(var(--i) * 0.4s); }
+@keyframes hero-meteor { to { transform: translate(-30px, 130px) rotate(20deg); opacity: 0; } }
+
+/* drift: soft clouds or dust moving sideways */
+.fx-drift i { width: 62px; height: 26px; border-radius: 50%; background: #ffffff55; filter: blur(4px); left: -70px; top: calc(8% + var(--i) * 12%); animation: hero-drift 7s linear infinite; animation-delay: calc(var(--i) * -1s); }
+.dark.fx-drift i { background: #f5c7a455; }
+@keyframes hero-drift { to { transform: translateX(520px); } }
+
+/* ring: calm rings that grow out of the symbol */
+.fx-ring .hero-fx i { left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; border: 2px solid #ffffffaa; border-radius: 50%; opacity: 0; animation: hero-ring 3s ease-out infinite; animation-delay: calc(var(--i) * 0.75s); }
+.fx-ring i:nth-child(n+5) { display: none; }
+@keyframes hero-ring { from { transform: scale(0.8); opacity: 0.8; } to { transform: scale(2.6); opacity: 0; } }
+
+/* sparks: little bursts */
+.fx-sparks i { width: 8px; height: 8px; background: #ffffffcc; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); left: calc(8% + var(--i) * 13%); top: calc(12% + var(--i) * 12%); animation: hero-tw 1.8s ease-in-out infinite; animation-delay: calc(var(--i) * 0.25s); }
+
+/* rise: bubbles or leaves floating up */
+.fx-rise i { width: 9px; height: 9px; border-radius: 50% 0 50% 50%; background: #ffffffbb; left: calc(8% + var(--i) * 14%); bottom: -12px; animation: hero-rise 3s ease-in infinite; animation-delay: calc(var(--i) * 0.4s); }
+@keyframes hero-rise { to { transform: translateY(-120px) rotate(40deg); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero *, .hero { animation: none !important; }
+}
+
+.h-dust.fx-drift i { background: #b5703fa6; filter: blur(5px); height: 30px; }
+.h-dust .hero-ic { background: #fff3e0e6; color: #c9822f; }

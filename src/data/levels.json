@@ -1,0 +1,1151 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "world": "moon",
+      "title": "First day",
+      "blurb": "Keep the base running. Charge the battery and recycle water.",
+      "days": 3,
+      "actions": 2,
+      "stations": [
+        "water",
+        "power",
+        "exp"
+      ],
+      "exps": [
+        "plants"
+      ],
+      "storms": [],
+      "events": [],
+      "sun": 1,
+      "costMult": 1,
+      "crewWater": 8,
+      "lifeSupport": 5,
+      "goal": 22,
+      "lowDose": 16,
+      "difficulty": 0.0,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "power",
+        "life"
+      ],
+      "learn": [
+        "Power runs out if you only spend it, so charge the battery.",
+        "The crew uses water every day, so recycle it."
+      ],
+      "fact": "Every spacecraft has a power budget. The International Space Station uses solar arrays and batteries to keep running through orbital night.",
+      "theme": {
+        "setting": "Moon base, morning",
+        "sky": "#0e1a38",
+        "ground": "#b9c0cf",
+        "mid": "#9aa3b5",
+        "far": "#7e879b",
+        "deck": "#e4ecf8",
+        "accent": "#1aa58a",
+        "stars": true,
+        "earth": "big",
+        "ambient": "stars",
+        "seed": 11,
+        "structures": [
+          {
+            "t": "dome",
+            "x": 190,
+            "s": 1.1
+          },
+          {
+            "t": "panels",
+            "x": 520
+          },
+          {
+            "t": "antenna",
+            "x": 650
+          },
+          {
+            "t": "flag",
+            "x": 80
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "world": "moon",
+      "title": "Solar weather",
+      "blurb": "A real solar storm is coming. Shield the crew.",
+      "days": 3,
+      "actions": 2,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield"
+      ],
+      "exps": [
+        "plants",
+        "rocks"
+      ],
+      "storms": [
+        {
+          "day": 3,
+          "band": "mild",
+          "pick": 1
+        }
+      ],
+      "events": [],
+      "sun": 1,
+      "costMult": 1,
+      "crewWater": 8,
+      "lifeSupport": 5,
+      "goal": 24,
+      "lowDose": 15,
+      "difficulty": 0.05,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "radiation"
+      ],
+      "learn": [
+        "Solar storms are real events that NASA records.",
+        "A good shield protects the crew, and radiation never goes back."
+      ],
+      "fact": "Your storm was real: {storm}. NASA scientists log events like this in a database called DONKI to warn missions.",
+      "theme": {
+        "setting": "Solar observatory, sunrise",
+        "sky": "#2a2466",
+        "skyLow": "#7a4a8a",
+        "ground": "#a9aab8",
+        "mid": "#8c8da3",
+        "far": "#6c6c88",
+        "deck": "#e8e6f7",
+        "accent": "#6b5be6",
+        "stars": true,
+        "earth": "none",
+        "ambient": "flare",
+        "seed": 22,
+        "sun": {
+          "x": 610,
+          "y": 150,
+          "r": 46,
+          "c": "#ffcf6b"
+        },
+        "structures": [
+          {
+            "t": "panels",
+            "x": 110
+          },
+          {
+            "t": "panels",
+            "x": 230
+          },
+          {
+            "t": "dome",
+            "x": 400
+          },
+          {
+            "t": "tower",
+            "x": 540
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "world": "moon",
+      "title": "Rewind",
+      "blurb": "Three tasks a day. A bad day? Rewind, but radiation stays.",
+      "days": 3,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield"
+      ],
+      "exps": [
+        "plants",
+        "rocks"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "mild",
+          "pick": 4
+        },
+        {
+          "day": 3,
+          "band": "medium",
+          "pick": 1
+        }
+      ],
+      "events": [],
+      "sun": 1,
+      "costMult": 1,
+      "crewWater": 8,
+      "lifeSupport": 5,
+      "goal": 33,
+      "lowDose": 15,
+      "difficulty": 0.1,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "systems"
+      ],
+      "learn": [
+        "Read the graph to see which day went well and which went wrong.",
+        "Replay a day, but remember: radiation already absorbed stays."
+      ],
+      "fact": "Engineers run what-if simulations before missions fly. Replaying a plan in a simulator is free, but radiation in space can never be undone.",
+      "theme": {
+        "setting": "Mission control dish, blue hour",
+        "sky": "#0b2a3d",
+        "skyLow": "#1b5a78",
+        "ground": "#a6b4c0",
+        "mid": "#8997a5",
+        "far": "#6a7886",
+        "deck": "#e1eff7",
+        "accent": "#0b8fc4",
+        "stars": true,
+        "earth": "big",
+        "ambient": "stars",
+        "seed": 33,
+        "structures": [
+          {
+            "t": "dish",
+            "x": 170,
+            "s": 1.3
+          },
+          {
+            "t": "dome",
+            "x": 420
+          },
+          {
+            "t": "antenna",
+            "x": 600
+          },
+          {
+            "t": "module",
+            "x": 300,
+            "s": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "world": "moon",
+      "title": "Rest stop",
+      "blurb": "The astronaut gets tired. Use the rest pod wisely.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest"
+      ],
+      "exps": [
+        "plants",
+        "rocks",
+        "sensor"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "medium",
+          "pick": 3
+        },
+        {
+          "day": 4,
+          "band": "medium",
+          "pick": 6
+        }
+      ],
+      "events": [],
+      "sun": 1,
+      "costMult": 1.05,
+      "crewWater": 8,
+      "lifeSupport": 5,
+      "goal": 36,
+      "lowDose": 20,
+      "difficulty": 0.15,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "crew"
+      ],
+      "learn": [
+        "Astronaut energy limits how much you can do in a day.",
+        "Rest is part of the plan, not a waste of time."
+      ],
+      "fact": "NASA studies how long missions, isolation and workload affect the health and performance of astronauts.",
+      "theme": {
+        "setting": "Crew quarters, warm lights",
+        "sky": "#2a1e3b",
+        "skyLow": "#6e3b5e",
+        "ground": "#c9bfc9",
+        "mid": "#a99fb0",
+        "far": "#85799a",
+        "deck": "#f7e9ee",
+        "accent": "#e0708a",
+        "stars": true,
+        "earth": "small",
+        "ambient": "glow",
+        "seed": 44,
+        "structures": [
+          {
+            "t": "greenhouse",
+            "x": 150
+          },
+          {
+            "t": "dome",
+            "x": 360,
+            "s": 1.2
+          },
+          {
+            "t": "module",
+            "x": 560
+          },
+          {
+            "t": "flag",
+            "x": 690
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "world": "moon",
+      "title": "Graduation day",
+      "blurb": "Training is almost over. A gentle breakdown and a storm: use everything you learned.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "rocks",
+        "plants",
+        "sensor"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "mild",
+          "pick": 2
+        },
+        {
+          "day": 4,
+          "band": "medium",
+          "pick": 0
+        }
+      ],
+      "events": [
+        {
+          "day": 3,
+          "type": "failure",
+          "station": "water"
+        }
+      ],
+      "sun": 1,
+      "costMult": 1.05,
+      "crewWater": 8,
+      "lifeSupport": 5,
+      "goal": 38,
+      "lowDose": 20,
+      "difficulty": 0.25,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "adapt",
+        "systems"
+      ],
+      "learn": [
+        "Equipment can break, so the repair bay matters.",
+        "Training is over: next stop, Mars."
+      ],
+      "fact": "Astronauts train for years on Earth and on the Moon-like terrain, so they are ready when something goes wrong far from home.",
+      "theme": {
+        "setting": "Lunar night, graduation",
+        "sky": "#05060f",
+        "skyLow": "#1a1330",
+        "ground": "#444c63",
+        "mid": "#363d52",
+        "far": "#2a3042",
+        "deck": "#d9deee",
+        "accent": "#3b57d6",
+        "stars": true,
+        "earth": "small",
+        "ambient": "storm",
+        "seed": 55,
+        "structures": [
+          {
+            "t": "dome",
+            "x": 200,
+            "s": 1.2
+          },
+          {
+            "t": "panels",
+            "x": 440
+          },
+          {
+            "t": "tower",
+            "x": 600
+          },
+          {
+            "t": "antenna",
+            "x": 90
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "world": "mars",
+      "title": "Touchdown",
+      "blurb": "Welcome to Mars. Less sunlight and tougher storms than the Moon.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "plants",
+        "sensor",
+        "rocks"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "medium",
+          "pick": 7
+        },
+        {
+          "day": 4,
+          "band": "strong",
+          "pick": 4
+        }
+      ],
+      "events": [],
+      "sun": 0.8,
+      "costMult": 1.15,
+      "crewWater": 9,
+      "lifeSupport": 5,
+      "goal": 33,
+      "lowDose": 17,
+      "difficulty": 0.4,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "adapt"
+      ],
+      "learn": [
+        "Mars is farther from the Sun, so charging is weaker than on the Moon.",
+        "Mars storms are stronger. Plan ahead."
+      ],
+      "fact": "Mars is farther from the Sun, so its sunlight is weaker than on the Moon or Earth.",
+      "theme": {
+        "setting": "Mars, landing morning",
+        "sky": "#7b5a86",
+        "skyLow": "#f2b690",
+        "ground": "#b3593e",
+        "mid": "#97482f",
+        "far": "#c9785a",
+        "deck": "#fbe7da",
+        "accent": "#d8643a",
+        "stars": true,
+        "earth": "none",
+        "haze": "#f0b08a",
+        "ambient": "dust",
+        "seed": 61,
+        "sun": {
+          "x": 620,
+          "y": 150,
+          "r": 24,
+          "c": "#fff0d2"
+        },
+        "structures": [
+          {
+            "t": "module",
+            "x": 200,
+            "s": 1.1
+          },
+          {
+            "t": "flag",
+            "x": 330
+          },
+          {
+            "t": "dome",
+            "x": 470
+          },
+          {
+            "t": "panels",
+            "x": 620
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "world": "mars",
+      "title": "Red dust",
+      "blurb": "A dust storm hides the sun. Charging gives half as much.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "plants",
+        "sensor",
+        "rocks"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "medium",
+          "pick": 2
+        },
+        {
+          "day": 4,
+          "band": "strong",
+          "pick": 7
+        }
+      ],
+      "events": [
+        {
+          "day": 2,
+          "type": "dust"
+        },
+        {
+          "day": 3,
+          "type": "dust"
+        }
+      ],
+      "sun": 0.8,
+      "costMult": 1.15,
+      "crewWater": 9,
+      "lifeSupport": 5,
+      "goal": 24,
+      "lowDose": 18,
+      "difficulty": 0.5,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "adapt",
+        "power"
+      ],
+      "learn": [
+        "Dust storms hide the sun, so you must save power.",
+        "Plan which days to charge."
+      ],
+      "fact": "Dust storms on Mars can block much of the sunlight that solar-powered missions rely on.",
+      "theme": {
+        "setting": "Mars, dusty afternoon",
+        "sky": "#d98a5b",
+        "skyLow": "#f0b38a",
+        "ground": "#b3523a",
+        "mid": "#96432e",
+        "far": "#c9785a",
+        "deck": "#fbe9de",
+        "accent": "#e0693a",
+        "stars": false,
+        "earth": "none",
+        "haze": "#e9a37a",
+        "ambient": "dust",
+        "seed": 66,
+        "sun": {
+          "x": 560,
+          "y": 120,
+          "r": 22,
+          "c": "#ffe8c4"
+        },
+        "structures": [
+          {
+            "t": "dome",
+            "x": 220
+          },
+          {
+            "t": "panels",
+            "x": 470
+          },
+          {
+            "t": "antenna",
+            "x": 620
+          },
+          {
+            "t": "rover",
+            "x": 100
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "world": "mars",
+      "title": "Breakdown",
+      "blurb": "Equipment fails. Use the repair bay before you can use a broken station.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "rocks",
+        "sensor",
+        "plants"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "strong",
+          "pick": 1
+        },
+        {
+          "day": 4,
+          "band": "strong",
+          "pick": 6
+        }
+      ],
+      "events": [
+        {
+          "day": 3,
+          "type": "failure",
+          "station": "water"
+        }
+      ],
+      "sun": 0.8,
+      "costMult": 1.2,
+      "crewWater": 9,
+      "lifeSupport": 5,
+      "goal": 20,
+      "lowDose": 19,
+      "difficulty": 0.6,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "adapt"
+      ],
+      "learn": [
+        "Equipment breaks, so keep time for repairs.",
+        "A broken station is a problem to solve, not the end."
+      ],
+      "fact": "Robots and crews far from home must fix problems themselves, so spacecraft are designed to be repaired and to have backups.",
+      "theme": {
+        "setting": "Mars workshop, dusk",
+        "sky": "#4a2638",
+        "skyLow": "#a24a43",
+        "ground": "#8f3f33",
+        "mid": "#733229",
+        "far": "#9a4a40",
+        "deck": "#f1dad6",
+        "accent": "#d9475f",
+        "stars": true,
+        "earth": "none",
+        "ambient": "sparks",
+        "seed": 77,
+        "structures": [
+          {
+            "t": "module",
+            "x": 180,
+            "s": 1.2
+          },
+          {
+            "t": "tower",
+            "x": 380
+          },
+          {
+            "t": "rover",
+            "x": 520
+          },
+          {
+            "t": "panels",
+            "x": 640
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "world": "mars",
+      "title": "Deep storm",
+      "blurb": "Three strong storms in a row. Shield smart, and keep the power on.",
+      "days": 4,
+      "actions": 3,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "sensor",
+        "rocks",
+        "plants"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "strong",
+          "pick": 1
+        },
+        {
+          "day": 3,
+          "band": "strong",
+          "pick": 3
+        },
+        {
+          "day": 4,
+          "band": "strong",
+          "pick": 6
+        }
+      ],
+      "events": [
+        {
+          "day": 3,
+          "type": "dust"
+        }
+      ],
+      "sun": 0.78,
+      "costMult": 1.2,
+      "crewWater": 9,
+      "lifeSupport": 5,
+      "goal": 24,
+      "lowDose": 20,
+      "difficulty": 0.68,
+      "start": {
+        "p": 50,
+        "w": 40,
+        "e": 100
+      },
+      "skills": [
+        "radiation",
+        "power"
+      ],
+      "learn": [
+        "Radiation adds up. Shield before the storm, not after.",
+        "Shielding costs power, so keep the battery charged."
+      ],
+      "fact": "NASA scientists watch the Sun and warn missions about solar storms so crews can protect themselves.",
+      "theme": {
+        "setting": "Mars, storm watch at dusk",
+        "sky": "#2b1d3a",
+        "skyLow": "#8a4a4a",
+        "ground": "#7c342b",
+        "mid": "#612920",
+        "far": "#8c4038",
+        "deck": "#efd9d6",
+        "accent": "#a8423f",
+        "stars": true,
+        "earth": "none",
+        "haze": "#9a4a3e",
+        "ambient": "storm",
+        "seed": 91,
+        "structures": [
+          {
+            "t": "tower",
+            "x": 180
+          },
+          {
+            "t": "dome",
+            "x": 360,
+            "s": 1.2
+          },
+          {
+            "t": "panels",
+            "x": 540
+          },
+          {
+            "t": "antenna",
+            "x": 660
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "world": "mars",
+      "title": "Crowded day",
+      "blurb": "Four tasks a day, but your energy is limited. Choose carefully.",
+      "days": 4,
+      "actions": 4,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "sensor",
+        "rocks",
+        "plants"
+      ],
+      "storms": [
+        {
+          "day": 3,
+          "band": "strong",
+          "pick": 3
+        },
+        {
+          "day": 4,
+          "band": "extreme",
+          "pick": 0
+        }
+      ],
+      "events": [
+        {
+          "day": 2,
+          "type": "dust"
+        },
+        {
+          "day": 3,
+          "type": "failure",
+          "station": "shield"
+        }
+      ],
+      "sun": 0.8,
+      "costMult": 1.25,
+      "crewWater": 10,
+      "lifeSupport": 5,
+      "goal": 31,
+      "lowDose": 24,
+      "difficulty": 0.8,
+      "start": {
+        "p": 65,
+        "w": 50,
+        "e": 100
+      },
+      "skills": [
+        "power",
+        "crew",
+        "systems"
+      ],
+      "learn": [
+        "With more tasks than energy, choose what matters most.",
+        "Check the graph every day to spot trouble early."
+      ],
+      "fact": "Mission control plans astronauts' days in detail because time and energy are limited, and every task has a cost.",
+      "theme": {
+        "setting": "Mars base, busy noon",
+        "sky": "#e6a173",
+        "skyLow": "#f7c9a3",
+        "ground": "#c25f3f",
+        "mid": "#a54d34",
+        "far": "#d98c68",
+        "deck": "#fdeee2",
+        "accent": "#c9602b",
+        "stars": false,
+        "earth": "none",
+        "haze": "#f1b48c",
+        "ambient": "dust",
+        "seed": 88,
+        "sun": {
+          "x": 150,
+          "y": 90,
+          "r": 26,
+          "c": "#fff1d6"
+        },
+        "structures": [
+          {
+            "t": "module",
+            "x": 120
+          },
+          {
+            "t": "greenhouse",
+            "x": 280
+          },
+          {
+            "t": "dome",
+            "x": 440,
+            "s": 1.1
+          },
+          {
+            "t": "tower",
+            "x": 580
+          },
+          {
+            "t": "rover",
+            "x": 680,
+            "s": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "world": "mars",
+      "title": "Storm season",
+      "blurb": "Extreme storms, dust and a breakdown. Hold the base together.",
+      "days": 4,
+      "actions": 4,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "rocks",
+        "sensor",
+        "plants"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "strong",
+          "pick": 5
+        },
+        {
+          "day": 3,
+          "band": "extreme",
+          "pick": 1
+        },
+        {
+          "day": 4,
+          "band": "extreme",
+          "pick": 4
+        }
+      ],
+      "events": [
+        {
+          "day": 2,
+          "type": "dust"
+        },
+        {
+          "day": 3,
+          "type": "failure",
+          "station": "shield"
+        }
+      ],
+      "sun": 0.78,
+      "costMult": 1.2,
+      "crewWater": 10,
+      "lifeSupport": 5,
+      "goal": 25,
+      "lowDose": 27,
+      "difficulty": 0.88,
+      "start": {
+        "p": 80,
+        "w": 55,
+        "e": 100
+      },
+      "skills": [
+        "radiation",
+        "adapt"
+      ],
+      "learn": [
+        "Several problems at once: prioritize what keeps the crew safe.",
+        "A broken shield on a storm day is dangerous. Fix it early."
+      ],
+      "fact": "Real missions plan for several things going wrong at the same time, which is why teams practice emergencies.",
+      "theme": {
+        "setting": "Mars, storm season",
+        "sky": "#3a2118",
+        "skyLow": "#c2703d",
+        "ground": "#8a3b2a",
+        "mid": "#6e2f22",
+        "far": "#a85a40",
+        "deck": "#f4ddd0",
+        "accent": "#c4552b",
+        "stars": false,
+        "earth": "none",
+        "haze": "#c98457",
+        "ambient": "dust",
+        "seed": 111,
+        "sun": {
+          "x": 130,
+          "y": 110,
+          "r": 20,
+          "c": "#ffdca8"
+        },
+        "structures": [
+          {
+            "t": "module",
+            "x": 140
+          },
+          {
+            "t": "greenhouse",
+            "x": 300
+          },
+          {
+            "t": "dome",
+            "x": 450,
+            "s": 1.1
+          },
+          {
+            "t": "tower",
+            "x": 590
+          },
+          {
+            "t": "rover",
+            "x": 690,
+            "s": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "world": "mars",
+      "title": "Mars boss",
+      "blurb": "Extreme storms and breakdowns. Everything you learned, all at once.",
+      "days": 4,
+      "actions": 4,
+      "stations": [
+        "water",
+        "power",
+        "exp",
+        "shield",
+        "rest",
+        "repair"
+      ],
+      "exps": [
+        "rocks",
+        "plants",
+        "sensor"
+      ],
+      "storms": [
+        {
+          "day": 2,
+          "band": "strong",
+          "pick": 5
+        },
+        {
+          "day": 3,
+          "band": "extreme",
+          "pick": 3
+        },
+        {
+          "day": 4,
+          "band": "extreme",
+          "pick": 6
+        }
+      ],
+      "events": [
+        {
+          "day": 2,
+          "type": "dust"
+        },
+        {
+          "day": 3,
+          "type": "failure",
+          "station": "exp"
+        }
+      ],
+      "sun": 0.75,
+      "costMult": 1.2,
+      "crewWater": 10,
+      "lifeSupport": 5,
+      "goal": 26,
+      "lowDose": 25,
+      "difficulty": 0.95,
+      "start": {
+        "p": 85,
+        "w": 55,
+        "e": 100
+      },
+      "skills": [
+        "power",
+        "life",
+        "radiation",
+        "crew",
+        "adapt",
+        "systems"
+      ],
+      "learn": [
+        "Use every skill you built: power, water, radiation, rest and repairs.",
+        "Plan, watch the timeline, and adapt when things change."
+      ],
+      "fact": "A real crew on Mars will need power, water, radiation protection and rest all working together.",
+      "theme": {
+        "setting": "Mars storm night",
+        "sky": "#2b1218",
+        "skyLow": "#5a2a2a",
+        "ground": "#6e2a25",
+        "mid": "#55201d",
+        "far": "#7d3330",
+        "deck": "#ecd5d4",
+        "accent": "#b8333f",
+        "stars": true,
+        "earth": "none",
+        "haze": "#8a3a30",
+        "ambient": "storm",
+        "seed": 99,
+        "structures": [
+          {
+            "t": "dome",
+            "x": 200,
+            "s": 1.2
+          },
+          {
+            "t": "tower",
+            "x": 380
+          },
+          {
+            "t": "module",
+            "x": 520
+          },
+          {
+            "t": "panels",
+            "x": 650
+          },
+          {
+            "t": "rover",
+            "x": 90
+          }
+        ]
+      }
+    }
+  ]
+}

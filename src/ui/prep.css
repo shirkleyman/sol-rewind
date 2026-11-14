@@ -1,0 +1,48 @@
+/* Earth prep screen and launch scene */
+/* The prep screen redraws itself on every tap, so it must not replay the screen fade-in. */
+.frame.prep { animation: none; }
+.prep h1 { font-size: 22px; margin: 0; }
+.prep .intro { margin: 6px 0 4px; color: var(--ink); }
+.prep .where { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.prep .items { display: grid; gap: 8px; margin: 10px 0; }
+.prep .item { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; background: var(--card); border: 0.5px solid var(--line); border-radius: 14px; padding: 8px 10px; box-shadow: 0 1px 4px #1b2f5a12; }
+.prep .item .pic { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; }
+.prep .item .nm { font-weight: 600; }
+.prep .item .meta { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.prep .item .why { font-size: 12px; color: var(--muted); }
+.prep .counter { display: flex; align-items: center; gap: 6px; }
+.prep .counter .btn { min-width: 44px; min-height: 44px; padding: 0; font-size: 22px; line-height: 1; border-radius: 12px; touch-action: manipulation; }
+.prep .counter .num { min-width: 28px; text-align: center; font-size: 20px; font-weight: 700; }
+.prep .massbox { background: var(--card); border: 0.5px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+.prep .massbar { height: 14px; border-radius: 7px; background: #e3eaf7; overflow: hidden; margin: 6px 0; }
+.prep .massbar > div { height: 100%; background: var(--acc, #1aa58a); border-radius: 7px; transition: width 0.3s ease; }
+.prep .massbar.over > div { background: #d9475f; }
+.prep .massrow { display: flex; justify-content: space-between; font-size: 13px; }
+.prep .massrow b { font-weight: 700; }
+.prep .massrow.over { color: #b4483a; }
+.prep .gets { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px; font-size: 13px; }
+.prep .gets li { background: #f4f8ff; border-radius: 10px; padding: 6px 8px; display: flex; gap: 6px; align-items: center; }
+.prep .gets li.zero { color: var(--faint); }
+.prep .starsrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.prep .hint { font-size: 12px; color: var(--muted); }
+.prep .msg { min-height: 20px; margin-top: 8px; font-size: 13px; color: #b4483a; }
+.prep .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; align-items: center; }
+.prep .actions .btn { min-height: 44px; padding: 8px 16px; touch-action: manipulation; }
+.prep .actions .spacer { flex: 1; }
+.prep .topline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.launch .stage { border-radius: 14px; overflow: hidden; background: #0b1020; line-height: 0; }
+.launch .stage svg { display: block; width: 100%; height: auto; }
+.launch .caption { text-align: center; font-size: 17px; font-weight: 600; margin: 10px 0 6px; min-height: 26px; }
+.launch .controls { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.launch .controls .btn { min-height: 44px; min-width: 96px; padding: 8px 18px; touch-action: manipulation; }
+.launch .controls [hidden] { display: none; }
+
+@media (max-width: 520px) {
+  .prep h1 { font-size: 19px; }
+  .prep .item { grid-template-columns: 40px 1fr; }
+  .prep .item .counter { grid-column: 1 / -1; justify-content: flex-end; }
+  .prep .item .pic { width: 40px; height: 40px; font-size: 21px; }
+  .launch .caption { font-size: 15px; }
+}
+.prep .topline .btn { min-height: 44px; padding: 6px 14px; touch-action: manipulation; }

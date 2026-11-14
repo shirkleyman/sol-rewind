@@ -1,0 +1,58 @@
+/* Surprise events: meteor shower, dust cloud passing, radio message from mission control */
+.sp-ov { position: absolute; inset: 0; z-index: 8; display: flex; align-items: flex-start; justify-content: center; padding: 12px; background: #14264dbb; overflow: auto; animation: spin-in 0.25s ease-out; }
+.sp-card { margin: auto; width: 100%; max-width: 440px; background: #fff; border: 0.5px solid var(--line, #d5deef); border-radius: 18px; padding: 14px 14px 12px; text-align: center; box-shadow: 0 8px 28px #0a143a55; overflow: hidden; position: relative; }
+.sp-title { margin: 2px 0 6px; font-size: 20px; }
+.sp-text { margin: 4px 0 8px; font-size: 15px; }
+.sp-delay { margin: 6px 0; font-size: 13px; color: var(--muted, #5a6b92); background: #f4f8ff; border-radius: 10px; padding: 6px 10px; }
+.sp-fact { display: flex; gap: 8px; align-items: flex-start; text-align: left; background: #fff8e1; border-radius: 12px; padding: 8px 10px; font-size: 13px; margin: 8px 0; }
+.sp-fact svg { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 1px; }
+.sp-src { font-size: 11px; color: var(--muted, #5a6b92); margin-bottom: 8px; word-break: break-word; }
+.sp-src a { color: #2b5ea8; }
+.sp-btn { min-height: 44px; min-width: 120px; font-size: 15px; }
+.sp-row { display: flex; justify-content: center; gap: 8px; }
+@keyframes spin-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Radio */
+.sp-radio { position: relative; width: 64px; height: 64px; margin: 0 auto 4px; border-radius: 50%; background: #e6f4ff; display: grid; place-items: center; color: #1f6fb4; }
+.sp-radio svg { width: 30px; height: 30px; position: relative; z-index: 1; }
+.sp-radio i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #1f6fb4; opacity: 0; }
+.sp-radio.live i { animation: sp-ring 1.8s ease-out infinite; }
+.sp-radio.live i:nth-of-type(2) { animation-delay: 0.6s; }
+.sp-radio.live i:nth-of-type(3) { animation-delay: 1.2s; }
+@keyframes sp-ring { from { transform: scale(0.8); opacity: 0.7; } to { transform: scale(1.9); opacity: 0; } }
+
+/* Dust cloud */
+.sp-cloudlane { position: relative; height: 70px; margin: 0 -14px 4px; overflow: hidden; background: linear-gradient(#f7d9b8, #f2c498); border-radius: 0 0 0 0; }
+.sp-cloud { position: absolute; top: 12px; left: 0; width: 160px; height: 46px; animation: sp-drift 6s linear infinite; }
+.sp-cloud i { position: absolute; border-radius: 50%; background: #c98a58; opacity: 0.55; filter: blur(3px); }
+.sp-cloud i:nth-child(1) { left: 0; top: 10px; width: 70px; height: 34px; }
+.sp-cloud i:nth-child(2) { left: 40px; top: 0; width: 80px; height: 42px; }
+.sp-cloud i:nth-child(3) { left: 90px; top: 12px; width: 66px; height: 30px; }
+.sp-cloud.still { animation: none; left: 30%; }
+@keyframes sp-drift { from { transform: translateX(-180px); } to { transform: translateX(520px); } }
+
+/* Meteors */
+.sp-arena { position: relative; height: 230px; border-radius: 14px; background: linear-gradient(#0f1b3d, #263a6b); overflow: hidden; touch-action: manipulation; margin: 6px 0; }
+.sp-arena::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: #8c8a96; }
+.sp-arena.still { height: auto; min-height: 100px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 14px; background: #263a6b; }
+.sp-arena.still::after { display: none; }
+.sp-rock { position: absolute; top: -70px; width: var(--sz, 56px); height: var(--sz, 56px); min-width: 44px; min-height: 44px; margin-left: -28px; padding: 0; border: 0; background: transparent; cursor: pointer; animation: sp-fall 2.1s linear forwards; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.sp-arena.still .sp-rock { position: static; margin: 0; animation: none; width: 64px; height: 64px; }
+.sp-rock i { display: block; width: 100%; height: 100%; border-radius: 46% 54% 50% 50%; background: radial-gradient(circle at 35% 30%, #fff3c4, #f0a63a 45%, #b85a1f 100%); box-shadow: 0 0 14px #ffb74d, 0 0 28px #ff8a3d88; }
+.sp-rock:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.sp-rock.got { animation: sp-pop 0.22s ease-out forwards; }
+@keyframes sp-fall { from { transform: translateY(0); } to { transform: translateY(300px); } }
+@keyframes sp-pop { to { transform: scale(1.8); opacity: 0; } }
+.sp-count { font-size: 15px; font-weight: 700; min-height: 22px; }
+
+@media (max-width: 520px) {
+  .sp-ov { padding: 8px; }
+  .sp-arena { height: 200px; }
+  @keyframes sp-fall { from { transform: translateY(0); } to { transform: translateY(270px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-ov { animation: none; }
+  .sp-radio i, .sp-cloud { animation: none; }
+}
+
+.sp-card .hero { margin: -14px -14px 10px; border-radius: 0; }

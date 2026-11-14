@@ -1,0 +1,28 @@
+{
+  "name": "sol-rewind",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sol Rewind: a browser puzzle game about running a Moon and Mars outpost. Every day counts, even the ones you undo.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "data": "node tools/build-data.mjs"
+  },
+  "dependencies": {
+    "@tabler/icons": "^3.26.0",
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "d3-geo": "^3.1.2",
+    "topojson-client": "^3.1.0",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8",
+    "world-atlas": "^2.0.2"
+  },
+  "license": "Apache-2.0"
+}

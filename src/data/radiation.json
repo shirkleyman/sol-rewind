@@ -1,0 +1,35 @@
+{
+ "source": "NASA OSDR RadLab",
+ "window": "2024-05-08 to 2024-05-15",
+ "unit": "absorbed dose rate in microgray per hour",
+ "note": "Different instruments and orbits, so compare only roughly.",
+ "sources": [
+  {
+   "id": "iss",
+   "label": "International Space Station",
+   "instrument": "DosTel",
+   "rows": 15254,
+   "mean": 18.98,
+   "median": 4.6,
+   "max": 527.29
+  },
+  {
+   "id": "moon",
+   "label": "Lunar orbit (LRO)",
+   "instrument": "CRaTER",
+   "rows": 192,
+   "mean": 497.24,
+   "median": 278.73,
+   "max": 3151.75
+  },
+  {
+   "id": "mars",
+   "label": "Mars surface (Curiosity)",
+   "instrument": "MSL-RAD",
+   "rows": 659,
+   "mean": 4.78,
+   "median": 4.74,
+   "max": 6.21
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+/* How Sol Rewind works: picture slides */
+.frame.howto { box-sizing: border-box; max-width: 560px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; gap: 10px; padding: calc(12px + env(safe-area-inset-top, 0px)) 14px calc(14px + env(safe-area-inset-bottom, 0px)); background: transparent; box-shadow: none; animation: none; }
+.ht-top { display: flex; align-items: center; justify-content: space-between; }
+.ht-step { font-size: 13px; color: var(--muted, #5a6b92); }
+.ht-card { flex: 1; display: flex; flex-direction: column; background: #fff; border: 0.5px solid var(--line, #d5deef); border-radius: 22px; overflow: hidden; box-shadow: 0 8px 28px #1b2f5a1f; }
+.ht-art { position: relative; min-height: 250px; flex: 0 0 auto; background: var(--tone, #dbe8ff); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 18px 12px; }
+.ht-title { margin: 16px 18px 6px; font-size: 24px; line-height: 1.15; text-align: center; color: var(--ink, #14264d); }
+.ht-lines { padding: 0 22px 20px; text-align: center; }
+.ht-lines p { margin: 6px 0; font-size: 16px; }
+.ht-cap { font-weight: 700; font-size: 15px; color: #14264d; min-height: 22px; text-align: center; }
+.ht-row { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
+
+/* station bubbles */
+.ht-st { width: 76px; height: 76px; border-radius: 50%; background: #fff; display: grid; place-items: center; color: var(--c); box-shadow: 0 6px 16px #1b2f5a2a; opacity: 0; animation: ht-pop 0.5s ease-out forwards, ht-bob 2.6s ease-in-out infinite; animation-delay: var(--d), calc(var(--d) + 0.5s); }
+.ht-st .ic svg { width: 38px; height: 38px; stroke-width: 1.8; }
+@keyframes ht-pop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes ht-bob { 50% { transform: translateY(-6px); } }
+
+/* day chips */
+.ht-day { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 80px; padding: 12px 10px; border-radius: 18px; background: #fff; border: 2.5px solid #2fa36b; opacity: 0; animation: ht-pop 0.5s ease-out forwards; animation-delay: var(--d); }
+.ht-day.bad { border-color: #d9475f; }
+.ht-day .ic svg { width: 40px; height: 40px; color: #2fa36b; }
+.ht-day.bad .ic svg { color: #d9475f; }
+.ht-day b { font-size: 14px; }
+
+/* stars */
+.ht-stars { display: inline-flex; gap: 2px; opacity: 0; animation: ht-pop 0.5s ease-out forwards; animation-delay: var(--d); }
+.ht-stars .ic svg { width: 44px; height: 44px; color: #f2b53d; fill: #f2b53d; }
+
+/* the rewind demo */
+.ht-demo { position: relative; width: min(100%, 340px); display: flex; flex-direction: column; gap: 10px; background: #fff; border-radius: 18px; padding: 14px 16px; box-shadow: 0 6px 18px #1b2f5a22; }
+.ht-bar { display: flex; flex-direction: column; gap: 4px; }
+.ht-bl { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.ht-bl .ic svg { width: 16px; height: 16px; }
+.ht-track { height: 14px; border-radius: 999px; background: #e7edf8; overflow: hidden; display: block; }
+.ht-track i { display: block; height: 100%; width: 0; border-radius: 999px; transition: width 0.9s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.ht-rew { position: absolute; right: 12px; top: 8px; width: 46px; height: 46px; border-radius: 50%; background: #ffb224; color: #fff; display: grid; place-items: center; opacity: 0; transform: scale(0.5); transition: opacity 0.3s, transform 0.3s; }
+.ht-rew .ic svg { width: 26px; height: 26px; }
+.ht-rew.on { opacity: 1; transform: scale(1); }
+.ht-rew.on .ic { animation: ht-spin 1s ease-in-out; }
+@keyframes ht-spin { to { transform: rotate(-360deg); } }
+.ht-lock { position: absolute; right: 12px; bottom: 10px; width: 36px; height: 36px; border-radius: 50%; background: #d9475f; color: #fff; display: grid; place-items: center; opacity: 0; transform: scale(0.4); transition: opacity 0.25s, transform 0.25s; }
+.ht-lock .ic svg { width: 20px; height: 20px; }
+.ht-lock.on { opacity: 1; transform: scale(1); animation: ht-shake 0.5s 0.2s; }
+@keyframes ht-shake { 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+
+/* dots and buttons */
+.ht-dots { display: flex; justify-content: center; gap: 4px; }
+.ht-dot { width: 28px; height: 28px; border: 0; background: transparent; position: relative; cursor: pointer; }
+.ht-dot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #c3cee6; transition: all 0.2s; }
+.ht-dot.on::after { width: 26px; margin-left: -13px; border-radius: 6px; background: var(--acc, #1aa58a); }
+.ht-dot:focus-visible { outline: 3px solid var(--acc, #1aa58a); border-radius: 8px; }
+.ht-nav { display: flex; gap: 10px; }
+.ht-nav .btn { flex: 1; min-height: 52px; font-size: 17px; }
+.ht-nav #ht-back { flex: 0 0 96px; }
+
+@media (max-width: 520px) { .ht-title { font-size: 22px; } .ht-art { min-height: 230px; } }
+@media (prefers-reduced-motion: reduce) { .ht-st, .ht-day, .ht-stars { animation: none; opacity: 1; } .ht-rew.on .ic, .ht-lock.on { animation: none; } .ht-track i { transition: none; } }
+@media (max-height: 780px) { .ht-art { min-height: 190px; padding: 12px; gap: 10px; } .ht-st { width: 64px; height: 64px; } .ht-title { margin-top: 12px; } .ht-lines { padding-bottom: 14px; } .ht-lines p { font-size: 15px; } }

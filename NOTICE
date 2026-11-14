@@ -1,0 +1,19 @@
+Sol Rewind
+Copyright 2026 The Sol Rewind team
+
+This project was made for the NASA Space Apps Challenge 2026. It is an independent project.
+NASA does not endorse it, and it does not use the NASA logo or any NASA insignia.
+
+The Apache License 2.0 in LICENSE covers the original code, game design, text, drawings and logo of this project.
+It does not change the terms of the third-party material listed below.
+
+Third-party material
+- NASA data (DONKI space weather, OSDR RadLab dose rates) and NASA images (NASA Image and Video Library):
+  credited where they are shown, and in DATA_SOURCES.md and PHOTOS.md. NASA media are generally free to use with credit.
+  See https://www.nasa.gov/nasa-brand-center/images-and-media/
+- Tabler Icons (MIT license): https://tabler.io/icons
+- GSAP (GreenSock Standard License, free to use): https://gsap.com/standard-license/
+  GSAP is installed from npm as a dependency and is not part of this repository's source.
+- Natural Earth coastlines (public domain) through the world-atlas package (ISC license).
+- d3-geo and topojson-client (ISC license), Vite (MIT), Vitest (MIT), TypeScript (Apache-2.0).
+- Rover photos: NASA (as15-86-11603) and NASA/JPL-Caltech/MSSS (PIA19142).

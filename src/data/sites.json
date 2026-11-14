@@ -1,0 +1,280 @@
+{
+ "sites": [
+  {
+   "level": 1,
+   "id": "apollo11",
+   "name": "Apollo 11",
+   "body": "Moon",
+   "place": "Tranquility Base, Moon",
+   "when": "20 July 1969",
+   "coords": {
+    "text": "0.674° N, 23.473° E",
+    "note": "Landing site (lunar module)",
+    "source": "NASA NSSDCA, Apollo Landing Site Coordinates (lunar module), https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+   },
+   "photo": {
+    "file": "apollo11.jpg",
+    "nasaId": "KSC-as11-40-5964",
+    "title": "KSC-as11-40-5964",
+    "credit": "NASA",
+    "caption": "Astronaut Buzz Aldrin sets up a solar wind experiment near Tranquility Base. Footprints surround him, and the lunar module Eagle is nearby.",
+    "w": 1532,
+    "h": 1920,
+    "page": "https://images.nasa.gov/details/KSC-as11-40-5964"
+   }
+  },
+  {
+   "level": 2,
+   "id": "apollo12",
+   "name": "Apollo 12",
+   "body": "Moon",
+   "place": "Ocean of Storms, Moon",
+   "when": "20 November 1969",
+   "coords": {
+    "text": "3.013° S, 23.422° W",
+    "note": "Landing site (lunar module)",
+    "source": "NASA NSSDCA, Apollo Landing Site Coordinates (lunar module), https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+   },
+   "photo": {
+    "file": "apollo12.jpg",
+    "nasaId": "AS12-48-7134",
+    "title": "Apollo 12 Mission image - Astronaut Alan L. Bean, lunar module pilot, and two U.S. spacecraft",
+    "credit": "NASA",
+    "caption": "The Apollo 12 lunar module is in the background and the unmanned Surveyor 3 spacecraft is in the foreground. The crew landed about 600 feet (180 meters) from Surveyor 3.",
+    "w": 1920,
+    "h": 1920,
+    "page": "https://images.nasa.gov/details/AS12-48-7134"
+   }
+  },
+  {
+   "level": 3,
+   "id": "apollo15",
+   "name": "Apollo 15",
+   "body": "Moon",
+   "place": "Hadley Rille, near St. George Crater, Moon",
+   "when": "31 July 1971",
+   "coords": {
+    "text": "26.132° N, 3.633° E",
+    "note": "Landing site (lunar module)",
+    "source": "NASA NSSDCA, Apollo Landing Site Coordinates (lunar module), https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+   },
+   "photo": {
+    "file": "apollo15.jpg",
+    "nasaId": "as15-85-11425",
+    "title": "Apollo 15 Mission image - Panoramic view north of Station 1, northwest of Hadley Rille",
+    "credit": "NASA",
+    "caption": "A view of Hadley Rille, a long winding valley on the Moon. You can see layers in the rille wall and big blocks on its floor.",
+    "w": 1889,
+    "h": 1920,
+    "page": "https://images.nasa.gov/details/as15-85-11425"
+   }
+  },
+  {
+   "level": 4,
+   "id": "apollo16",
+   "name": "Apollo 16",
+   "body": "Moon",
+   "place": "Descartes highlands, Moon",
+   "when": "21 April 1972",
+   "coords": {
+    "text": "8.973° S, 15.501° E",
+    "note": "Landing site (lunar module)",
+    "source": "NASA NSSDCA, Apollo Landing Site Coordinates (lunar module), https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+   },
+   "photo": {
+    "file": "apollo16.jpg",
+    "nasaId": "as16-107-17436",
+    "title": "View of the Lunar Module \"Orion\" and Lunar Roving Vehicle during first EVA",
+    "credit": "NASA",
+    "caption": "The lunar module Orion and the lunar roving vehicle at the Descartes landing site. John Young stands behind the rover, and Stone Mountain rises in the background.",
+    "w": 1853,
+    "h": 1920,
+    "page": "https://images.nasa.gov/details/as16-107-17436"
+   }
+  },
+  {
+   "level": 5,
+   "id": "apollo17",
+   "name": "Apollo 17",
+   "body": "Moon",
+   "place": "Taurus-Littrow valley, Moon",
+   "when": "13 December 1972",
+   "coords": {
+    "text": "20.191° N, 30.772° E",
+    "note": "Landing site (lunar module)",
+    "source": "NASA NSSDCA, Apollo Landing Site Coordinates (lunar module), https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+   },
+   "photo": {
+    "file": "apollo17.jpg",
+    "nasaId": "as17-140-21497",
+    "title": "Apollo 17 Mission image - Sta 6, Panoramic, LMP",
+    "credit": "NASA",
+    "caption": "Scientist-astronaut Harrison Schmitt stands next to a huge, split boulder at the Taurus-Littrow landing site. Eugene Cernan took the picture.",
+    "w": 1920,
+    "h": 1897,
+    "page": "https://images.nasa.gov/details/as17-140-21497"
+   }
+  },
+  {
+   "level": 6,
+   "id": "viking1",
+   "name": "Viking 1",
+   "body": "Mars",
+   "place": "Chryse Planitia, Mars",
+   "when": "Landed 20 July 1976",
+   "coords": {
+    "text": "22.27° N, 312.05° E (planetocentric)",
+    "note": "Landing site",
+    "source": "NASA NSSDCA, Viking 1 Lander, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C"
+   },
+   "photo": {
+    "file": "viking1.jpg",
+    "nasaId": "PIA00563",
+    "title": "First Color Image From Viking Lander 1",
+    "credit": "NASA/JPL",
+    "caption": "The first color image from Viking Lander 1, taken on the surface of Mars.",
+    "w": 563,
+    "h": 512,
+    "page": "https://images.nasa.gov/details/PIA00563"
+   }
+  },
+  {
+   "level": 7,
+   "id": "opportunity",
+   "name": "Opportunity",
+   "body": "Mars",
+   "place": "Perseverance Valley, rim of Endeavour Crater, Mars",
+   "when": "13 May to 10 June 2018",
+   "coords": {
+    "text": "1.946° S, 354.473° E",
+    "note": "Landing site in Meridiani Planum (this photo was taken years later, at Perseverance Valley)",
+    "source": "NASA NSSDCA, Mars Exploration Rover B, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A"
+   },
+   "photo": {
+    "file": "opportunity.jpg",
+    "nasaId": "PIA22909",
+    "title": "Opportunity Legacy Pan (True Color)",
+    "credit": "NASA/JPL-Caltech/Cornell/ASU",
+    "caption": "Opportunity's last panorama, taken at its final resting place in Perseverance Valley. A global dust storm silenced the solar-powered rover on 10 June 2018.",
+    "w": 900,
+    "h": 201,
+    "page": "https://images.nasa.gov/details/PIA22909"
+   }
+  },
+  {
+   "level": 8,
+   "id": "spirit",
+   "name": "Spirit",
+   "body": "Mars",
+   "place": "Troy, Gusev Crater, Mars",
+   "when": "Spring 2009",
+   "coords": {
+    "text": "14.572° S, 175.478° E",
+    "note": "Landing site in Gusev Crater (this photo was taken at Troy, years later)",
+    "source": "NASA NSSDCA, Mars Exploration Rover A, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-027A"
+   },
+   "photo": {
+    "file": "spirit.jpg",
+    "nasaId": "PIA12203",
+    "title": "Calypso Panorama of Spirit View from Troy",
+    "credit": "NASA/JPL-Caltech/Cornell University",
+    "caption": "A full-circle view of the terrain around Troy, where Spirit got stuck in soft soil in the spring of 2009.",
+    "w": 1920,
+    "h": 422,
+    "page": "https://images.nasa.gov/details/PIA12203"
+   }
+  },
+  {
+   "level": 9,
+   "id": "insight",
+   "name": "InSight",
+   "body": "Mars",
+   "place": "Western Elysium Planitia, Mars",
+   "when": "24 April 2022",
+   "coords": {
+    "text": "4.502° N, 135.623° E",
+    "note": "Landing site (the lander never moved)",
+    "source": "Golombek et al., Lunar and Planetary Science Conference 2019 (not a NASA page, check before use)"
+   },
+   "photo": {
+    "file": "insight.jpg",
+    "nasaId": "PIA25287",
+    "title": "InSight's Final Selfie",
+    "credit": "NASA/JPL-Caltech",
+    "caption": "InSight's final selfie. The lander is covered in far more dust than in its first selfie, so its solar panels made less power.",
+    "w": 1920,
+    "h": 1152,
+    "page": "https://images.nasa.gov/details/PIA25287"
+   }
+  },
+  {
+   "level": 10,
+   "id": "curiosity",
+   "name": "Curiosity",
+   "body": "Mars",
+   "place": "Gale Crater, Mars",
+   "when": "August 2012",
+   "coords": {
+    "text": "4.5895° S, 137.4417° E",
+    "note": "Landing site in Gale Crater",
+    "source": "Vasavada et al., Journal of Geophysical Research 2014 (not a NASA page, check before use)"
+   },
+   "photo": {
+    "file": "curiosity.jpg",
+    "nasaId": "PIA16032",
+    "title": "Mount Sharp on the Horizon",
+    "credit": "NASA/JPL-Caltech/MSSS",
+    "caption": "A piece of Curiosity's first color 360-degree panorama. Mount Sharp, a mountain in the middle of Gale Crater, starts to rise in the distance.",
+    "w": 1920,
+    "h": 1080,
+    "page": "https://images.nasa.gov/details/PIA16032"
+   }
+  },
+  {
+   "level": 11,
+   "id": "pathfinder",
+   "name": "Mars Pathfinder",
+   "body": "Mars",
+   "place": "Ares Vallis, Mars",
+   "when": "1997",
+   "coords": {
+    "text": "19.33° N, 33.55° W",
+    "note": "Landing site",
+    "source": "NASA NSSDCA, Mars Pathfinder, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A"
+   },
+   "photo": {
+    "file": "pathfinder.jpg",
+    "nasaId": "PIA01551",
+    "title": "Newly Deployed Sojourner Rover",
+    "credit": "NASA/JPL",
+    "caption": "The Sojourner rover, newly deployed on the surface after Mars Pathfinder landed in the Ares Vallis region.",
+    "w": 1099,
+    "h": 572,
+    "page": "https://images.nasa.gov/details/PIA01551"
+   }
+  },
+  {
+   "level": 12,
+   "id": "perseverance",
+   "name": "Perseverance",
+   "body": "Mars",
+   "place": "Floor of Jezero Crater, Mars",
+   "when": "3 July 2021",
+   "coords": {
+    "text": "Jezero Crater, western edge of Isidis Planitia",
+    "note": "Region (exact coordinates still to be added from a NASA source)",
+    "source": "NASA NSSDCA, Mars 2020 Perseverance, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-052A"
+   },
+   "photo": {
+    "file": "perseverance.jpg",
+    "nasaId": "PIA24744",
+    "title": "The End of One Drive by Perseverance on the Floor of Jezero Crater",
+    "credit": "NASA/JPL-Caltech",
+    "caption": "Perseverance's tracks at the end of one autonomous drive on the floor of Jezero Crater, on 3 July 2021.",
+    "w": 2160,
+    "h": 859,
+    "page": "https://images.nasa.gov/details/PIA24744"
+   }
+  }
+ ]
+}
