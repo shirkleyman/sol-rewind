@@ -55,7 +55,7 @@ function smooth(pts: P[]): string {
 export function mapSvg(stars: number[], all: boolean, stopsDone: string[]): string {
   const rnd = mulberry32(5);
   const israel = prepPoint();
-  let s = `<svg id="map" viewBox="0 0 680 ${MAP_H}" width="100%" role="img" aria-label="Journey map from Earth at the bottom, a long trip with three learning stops, five Moon training levels, another long trip with three learning stops, and seven Mars levels at the top">`;
+  let s = `<svg id="map" viewBox="0 0 680 ${MAP_H}" width="100%" role="img" aria-label="Journey map from Earth at the bottom, a long trip, five Moon training levels, another long trip, and seven Mars levels at the top">`;
   s += `<rect width="680" height="${MAP_H}" rx="14" fill="#eaf1ff"/>`;
   for (let i = 0; i < 60; i++) s += `<circle class="twinkle" cx="${(rnd() * 680).toFixed(0)}" cy="${(rnd() * (MAP_H - 220)).toFixed(0)}" r="${(1.3 + rnd() * 1.5).toFixed(1)}" fill="#b9c9ea"/>`;
   s += marsGroup(MARS.cx, MARS.cy, MARS.r);
@@ -74,8 +74,8 @@ export function mapSvg(stars: number[], all: boolean, stopsDone: string[]): stri
   s += `<rect x="14" y="30" width="250" height="34" rx="17" fill="#e0693a"/><text class="pilltxt" x="139" y="53" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Mars: the real test</text>`;
   s += `<rect x="14" y="950" width="230" height="34" rx="17" fill="#1aa58a"/><text class="pilltxt" x="129" y="973" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Moon: training</text>`;
   s += `<rect x="14" y="1700" width="150" height="34" rx="17" fill="#3b82c4"/><text class="pilltxt" x="89" y="1723" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Earth: launch</text>`;
-  s += `<text class="maptxt" x="16" y="1480" fill="#5a6b92" font-size="13">Earth to the Moon:</text><text class="maptxt" x="16" y="1500" fill="#5a6b92" font-size="13">about 384,000 km</text><text class="maptxt" x="16" y="1520" fill="#5a6b92" font-size="12">three learning stops</text>`;
-  s += `<text class="maptxt" x="16" y="680" fill="#5a6b92" font-size="13">The Moon to Mars:</text><text class="maptxt" x="16" y="700" fill="#5a6b92" font-size="13">a very long trip</text><text class="maptxt" x="16" y="720" fill="#5a6b92" font-size="12">three learning stops</text>`;
+  s += `<text class="maptxt" x="16" y="1480" fill="#5a6b92" font-size="13">Earth to the Moon:</text><text class="maptxt" x="16" y="1500" fill="#5a6b92" font-size="13">about 384,000 km</text>`;
+  s += `<text class="maptxt" x="16" y="680" fill="#5a6b92" font-size="13">The Moon to Mars</text>`;
 
   for (const st of STOPS) {
     const [x, y] = STOP_POS[st.id];
