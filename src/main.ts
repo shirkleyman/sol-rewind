@@ -289,6 +289,11 @@ function startLevel(id: number): void {
       writeSave(save);
     },
     getTotalStars: () => avatarTotal(save.stars),
+    getLessons: () => save.lessons,
+    markLesson: (id) => {
+      if (!save.lessons.includes(id)) save.lessons.push(id);
+      writeSave(save);
+    },
     addRocks: (n) => {
       save.rocks += n;
       writeSave(save);

@@ -20,9 +20,11 @@ export interface SaveData {
   rocks: number;
   /** Read text aloud (Web Speech). */
   voice: boolean;
+  /** Short guided lessons the child has already seen (for example 'rewind'). */
+  lessons: string[];
 }
 
-const fresh = (): SaveData => ({ v: 1, stars: Array(16).fill(0), best: {}, sound: true, music: true, briefed: false, kit: emptyKit(), stops: [], name: '', helmet: 'white', rocks: 0, voice: false });
+const fresh = (): SaveData => ({ v: 1, stars: Array(16).fill(0), best: {}, sound: true, music: true, briefed: false, kit: emptyKit(), stops: [], name: '', helmet: 'white', rocks: 0, voice: false, lessons: [] });
 
 export function loadSave(): SaveData {
   try {
