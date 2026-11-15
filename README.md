@@ -77,9 +77,10 @@ To rebuild them: `python tools/fetch_donki.py OUT_DIR/donki` (needs a free `NASA
 
 ## Publish on GitHub Pages
 
-Build with `npm run build` and publish the `dist` folder (the build uses a relative base path, so it works from any repository name).
-This repository is published from its `gh-pages` branch: in the repository settings, **Pages, Source: Deploy from a branch, `gh-pages`**.
-To publish automatically on every push to `main` instead, copy `tools/deploy.yml.example` to `.github/workflows/deploy.yml` and set **Pages, Source: GitHub Actions**.
+The repository has a single branch, `main`. The site is served from the `docs/` folder of `main` (Settings, Pages, Source: Deploy from a branch, `main`, `/docs`).
+To publish a new version: run `npm run build`, copy the contents of `dist/` into `docs/` (replacing the old files, and keep the `.nojekyll` file), then commit and push.
+The build uses a relative base path, so it works from any repository name.
+To publish automatically on every push instead, copy `tools/deploy.yml.example` to `.github/workflows/deploy.yml` and set **Pages, Source: GitHub Actions**.
 
 ## Privacy
 
