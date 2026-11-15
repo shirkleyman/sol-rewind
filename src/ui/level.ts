@@ -25,6 +25,7 @@ import { sfx } from './sound';
 import { timelineHtml } from './timeline';
 import { bindPostcard, postcardHtml } from './postcard';
 import { bindNameForm, certificateHtml, nameFormHtml, printCertificate } from './certificate';
+import { GAME_TIPS, assistLevel, easedDifficulty, nextStreak } from '../core/assist';
 import { surpriseFor } from '../core/surprises';
 import { runSurprise } from './surprise';
 import { heroHtml } from './hero';
@@ -44,6 +45,8 @@ export interface LevelHooks {
   setName: (n: string) => void;
   getTotalStars: () => number;
   addRocks: (n: number) => void;
+  getLessons: () => string[];
+  markLesson: (id: string) => void;
   musicOn: boolean;
   getStars: () => number[];
   soundOn: boolean;
@@ -92,6 +95,12 @@ export class LevelView {
   private ghost: Plan | null = null;
   /** Extra days played after the mission was finished ("one more day"). */
   private bonus = 0;
+  /** Rough runs in a row, and the help level, for every mini game. Used to ease a game that a child finds hard. */
+  private streak: Record<string, number> = {};
+  private assist: Record<string, number> = {};
+  /** The guided "rewind" lesson in the first mission: 'try' = waiting for the child to rewind, 'after' = explaining what stayed. */
+  private lesson: 'try' | 'after' | null = null;
+  private lessonLost = 0;
   private seenSurprises = new Set<string>();
   private sAbort: AbortController | null = null;
   /** A sheet shown over the finish card: the postcard, the certificate, or the name form. */
@@ -177,7 +186,7 @@ export class LevelView {
       this.alarmDay = day;
       sfx.alarm();
     }
-    if (!this.tip && !this.briefing && !this.info && !over && !this.busy) {
+    if (!this.tip && !this.lesson && !this.briefing && !this.info && !over && !this.busy) {
       const t = pickTip(L, ev, live, day, this.seenTips);
       if (t) {
         this.tip = t;
@@ -205,7 +214,7 @@ export class LevelView {
     else if (this.info) ov = this.infoHtml(storm?.label ?? null);
     else if (coreDone && over) ov = this.finishHtml(core.stars, core.S.s, core.dose, ev);
     else if (ev.failed && !coreDone) {
-      ov = `<div class="ov"><div class="box">${heroHtml('fail', { size: 'sm' })}<h2>Mission failed</h2><div class="note" style="margin:6px 0 10px">${ev.S.failed ? 'Power or water ran out.' : 'Radiation got too high.'} Pick a day in the day strip and replay from there, or go back.</div><div class="row" style="justify-content:center"><button class="btn" data-act="dismiss">Look at the days</button><button class="btn" data-act="map">Back to the map</button></div></div></div>`;
+      ov = `<div class="ov"><div class="box">${heroHtml('fail', { size: 'sm' })}<h2>Let's try again!</h2><div class="note" style="margin:6px 0 10px">${ev.S.failed ? 'Power or water ran out.' : 'Radiation got too high.'} Pick a day in the day strip and play it again, or go back.</div><div class="row" style="justify-content:center"><button class="btn" data-act="dismiss">Look at the days</button><button class="btn" data-act="map">Back to the map</button></div></div></div>`;
     }
 
     const alerts =
@@ -213,14 +222,19 @@ export class LevelView {
       (dust ? `<div class="al dust">${icon('sun')} Day ${day}: a dust storm hides the sun. Solar charging gives half as much. <button class="linkbtn" data-info="dust">Learn about dust storms</button></div>` : '') +
       (broken ? `<div class="al">${icon('tool')} Equipment failure: the ${stationLabel(L, broken, day)} is out of order today. Fix it at the repair bay first. <button class="linkbtn" data-info="repair">Why do things break?</button></div>` : '');
 
-    const coach = this.tip
+    const R0 = roverFor(L.world);
+    const coach = this.lesson === 'try'
+      ? `<div class="coach lesson" role="status">${icon('history')}<div><div class="coach-skill">${R0.nickname} · A magic trick</div>You can undo a day. Tap <b>Try day 1 again</b> in the day strip below.</div></div>`
+      : this.lesson === 'after'
+        ? `<div class="coach lesson" role="status">${icon('lock')}<div><div class="coach-skill">${R0.nickname} · The big rule</div>It worked! Power and water are back. But look at <b>Radiation</b>: +${Math.round(this.lessonLost)} stays with the crew. Radiation never goes back.</div><button class="btn small" data-act="lesson-ok">Got it</button></div>`
+        : this.tip
       ? `<div class="coach" role="status">${icon(SKILL_ICON[this.tip.skill])}<div><div class="coach-skill">${roverFor(L.world).nickname} · ${skillById(this.tip.skill).name}</div>${this.tip.text}</div><button class="btn small" data-act="tip-ok">Got it</button></div>`
       : '';
 
     this.root.innerHTML = `<div class="frame lvl" style="--acc:${T.accent};--deck:${T.deck}">
       <div class="topbar"><div class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn small" id="back">${icon('arrowLeft')} Map</button><span class="chip">${L.world === 'moon' ? 'Moon' : 'Mars'} · level ${L.id}: ${L.title}</span><span class="chip">${over ? 'Finished' : `Day ${day} / ${Ldays} · task ${this.today.length + 1} of ${L.actions}`}</span></div><div class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn small" id="goals" aria-label="Mission goals and skills">${icon('bulb')} Skills</button><button class="btn small" id="mus" aria-label="Toggle music">${icon(this.hooks.musicOn ? 'music' : 'musicOff')}</button><button class="btn small" id="snd" aria-label="Toggle sound effects">${icon(this.hooks.soundOn ? 'volume' : 'volumeOff')}</button>${voiceSupported() ? `<button class="btn small ${this.hooks.voiceOn ? 'on' : ''}" id="vox" aria-pressed="${this.hooks.voiceOn}" aria-label="Read aloud">${icon('speakerphone')}</button>` : ''}</div></div>
       <div class="scene" id="scene"><div class="backdrop">${sceneSvg(T)}</div><div class="fx ${storm ? 'on' : ''}"></div>${dust ? '<div class="dust-fx"></div>' : ''}
-        <div class="hud"><div class="meters">${meter('Power', 'bolt', live.p, '#e8a317')}${meter('Water', 'droplet', live.w, '#3b9be8')}${meter('Energy', 'heart', live.e, '#3dbf7f')}</div><div class="hud-side"><span class="chip">Science ${Math.round(live.s)} / ${L.goal}</span><span class="chip">Radiation ${Math.round(ev.dose)}</span><button class="btn small" id="win">${icon('infoCircle')} Look outside</button></div><div class="setting">${T.setting}</div></div>
+        <div class="hud"><div class="meters">${meter('Power', 'bolt', live.p, '#e8a317')}${meter('Water', 'droplet', live.w, '#3b9be8')}${meter('Energy', 'heart', live.e, '#3dbf7f')}</div><div class="hud-side"><span class="chip">Science ${Math.round(live.s)} / ${L.goal}</span><span class="chip" id="radchip">Radiation ${Math.round(ev.dose)}</span><button class="btn small" id="win">${icon('infoCircle')} Look outside</button></div><div class="setting">${T.setting}</div></div>
         <div class="stations">${stations}</div><div class="floor" id="floor"><div class="rv-pal" id="rover" style="left:${this.roverPos() * 100}%;--dir:${this.dir}"><div class="flip">${roverSvg(roverFor(L.world).id)}</div></div><div class="ch idle" id="char" style="left:${this.charFrac * 100}%;--dir:${this.dir}"><div class="flip">${astro(T.accent, this.hooks.helmet)}</div></div></div>${ov}</div>
       ${coach}
       ${alerts}
@@ -230,6 +244,15 @@ export class LevelView {
       <div class="note" style="margin-top:6px">${icon('database')} Storm days use real NASA DONKI events. Costs and rewards are game numbers.</div></div>`;
 
     this.bind(over);
+    if (this.lesson === 'try') {
+      this.root.querySelector('#rw')?.classList.add('lesson-pulse');
+      this.root.querySelector('.tday.done.sel')?.classList.add('lesson-pulse');
+      window.setTimeout(() => this.root.querySelector('#rw')?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 250);
+    }
+    if (this.lesson === 'after') {
+      this.root.querySelector('#radchip')?.classList.add('lesson-pulse');
+      window.setTimeout(() => this.root.querySelector('#radchip')?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 250);
+    }
     this.autoSpeak(over, coreDone, storm?.label ?? null);
     if (!over && !this.briefing && !this.busy && !this.sheet && !this.info && !this.eduKey && !this.roverOpen && this.today.length === 0) {
       const sp = surpriseFor(L.id, L.world, day, this.variant, { stormToday: !!storm, dustToday: dust, brokenToday: !!broken, days: Ldays });
@@ -299,6 +322,7 @@ export class LevelView {
     });
     on('#rw', () => {
       if (this.busy) return;
+      const wasLesson = this.lesson === 'try';
       this.ghost = this.plan.length ? this.plan.map((d) => d.slice()) : this.ghost;
       const out = rewindTo(this.level, this.plan, this.sel, this.carried);
       this.plan = out.plan;
@@ -309,6 +333,16 @@ export class LevelView {
       this.sel = this.plan.length;
       this.tip = null;
       this.msg = `Replaying from day ${this.plan.length + 1}. Power and water are restored, but +${Math.round(out.lost)} radiation stays with the crew.`;
+      if (wasLesson) {
+        this.lesson = 'after';
+        this.lessonLost = out.lost;
+      }
+      sfx.click();
+      this.render();
+    });
+    on('[data-act="lesson-ok"]', () => {
+      this.lesson = null;
+      this.hooks.markLesson('rewind');
       sfx.click();
       this.render();
     });
@@ -416,6 +450,7 @@ export class LevelView {
     on('[data-act="again"]', () => {
       this.ghost = this.plan.slice(0, this.level.days).map((d) => d.slice());
       this.bonus = 0;
+      this.lesson = null;
       this.variant++;
       this.level = rerollStorms(this.baseLevel, this.variant);
       this.briefing = true;
@@ -477,11 +512,16 @@ export class LevelView {
   }
 
   private endDay(): void {
+    if (this.lesson === 'try') {
+      this.lesson = null;
+      this.hooks.markLesson('rewind');
+    }
     this.plan.push(this.today.slice());
     this.today = [];
     this.sel = this.plan.length;
     this.msg = '';
     this.tip = null;
+    if (this.level.id === 1 && this.plan.length === 1 && this.bonus === 0 && this.lesson === null && !this.hooks.getLessons().includes('rewind')) this.lesson = 'try';
     sfx.click();
     this.render();
   }
@@ -637,7 +677,10 @@ export class LevelView {
     gm.innerHTML = `<div class="gt">${game.title}</div><div class="gh">${game.help}</div><div class="ga"></div>`;
     scene.appendChild(gm);
     const area = gm.querySelector<HTMLElement>('.ga')!;
-    const d = this.dayDifficulty(day);
+    const gameId = k === 'exp' ? expForDay(L, day) : k;
+    const level0 = this.assist[gameId] ?? 0;
+    const d = easedDifficulty(this.dayDifficulty(day), level0);
+    if (level0 > 0) gm.querySelector('.gt')!.insertAdjacentHTML('beforeend', ' <span class="chip assist">Helper mode</span>');
     const eduKey = this.eduFor(k, day);
     const factHtml = this.seenFacts.has(eduKey) ? '' : `<div class="factcard small">${icon('bulb')}<div>${EDU[eduKey].real}</div></div>`;
     this.seenFacts.add(eduKey);
@@ -645,8 +688,13 @@ export class LevelView {
       const stars = starsFromScore(score, d);
       const m = STAR_YIELD[stars];
       stars === 3 ? sfx.perfect() : stars === 2 ? sfx.good() : sfx.bad();
-      const gameId = k === 'exp' ? expForDay(L, day) : k;
-      area.innerHTML = `${rewardHtml(gameId, stars, { photo: siteFor(L.id) ? photoUrl(siteFor(L.id)!.photo.file) : '', world: L.world })}${starRow(stars)}<div style="margin:6px 0;font-size:16px;font-weight:600">${this.yieldLabel(k, m, day)}</div><div class="note" style="margin-bottom:10px">${['', 'Rough run', 'Good run', 'Perfect run'][stars]}</div>${factHtml}<button class="btn primary" id="collect">Collect</button>`;
+      const streak = nextStreak(this.streak[gameId] ?? 0, stars);
+      this.streak[gameId] = streak;
+      const lvl = assistLevel(streak, this.assist[gameId] ?? 0);
+      const eased = lvl > (this.assist[gameId] ?? 0);
+      this.assist[gameId] = lvl;
+      const helpHtml = stars <= 1 ? `<div class="factcard assist">${icon('bulb')}<div><b>Nice try! A tip:</b> ${GAME_TIPS[gameId] ?? ''}${eased ? ' Next time this game will be a little easier.' : ''}</div></div>` : '';
+      area.innerHTML = `${rewardHtml(gameId, stars, { photo: siteFor(L.id) ? photoUrl(siteFor(L.id)!.photo.file) : '', world: L.world })}${starRow(stars)}<div style="margin:6px 0;font-size:16px;font-weight:600">${this.yieldLabel(k, m, day)}</div><div class="note" style="margin-bottom:10px">${['', 'Nice try', 'Good run', 'Perfect run'][stars]}</div>${helpHtml}${factHtml}<button class="btn primary" id="collect">Collect</button>`;
       area.querySelector<HTMLButtonElement>('#collect')!.onclick = async () => {
         const label = this.yieldLabel(k, m, day);
         gm.remove();

@@ -77,3 +77,7 @@ Every mini game scales its amount of work with the difficulty `d` (0 to 1), not 
 | Repair bay (breakdowns) | 6 | 9 | 12 |
 
 Goals of levels 7, 9, 11 and 12 were re-tuned with `tools/difficulty.ts` after this change. The kid skill numbers are still assumptions, so tune again after real playtests.
+
+## Help for children who find a game hard (kids-improvements)
+
+After two rough runs (1 star) in a row, the same mini game gets a little easier (difficulty lowered by 0.25) and shows a "Helper mode" chip. After four it gets easier again, up to two steps. The help stays for the rest of the mission and never takes stars away. Every rough run also shows one short tip for that game (`src/core/assist.ts`). The first mission also teaches the rewind rule with a short guided moment after day 1.
