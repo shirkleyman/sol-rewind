@@ -119,6 +119,11 @@ export function mapSvg(stars: number[], all: boolean, stopsDone: string[]): stri
 }
 
 /** Small entrance animation so the map feels alive. */
+/** Stops every map animation. Call before the map is replaced, so no tween keeps running on removed nodes. */
+export function stopMapAnimations(root: HTMLElement): void {
+  gsap.killTweensOf(root.querySelectorAll('.twinkle, .planet, .node, .stop'));
+}
+
 export function animateMap(root: HTMLElement, focusLevel: number | null): void {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const planets = root.querySelectorAll('.planet');

@@ -1,7 +1,7 @@
 :root {
   --ink: #14264d;
   --muted: #5a6b92;
-  --faint: #8a97b5;
+  --faint: #66769a;
   --line: #d5deef;
   --bg: #eef3fb;
   --panel: #f6f9ff;
@@ -26,7 +26,7 @@ button:focus-visible, [role='button']:focus-visible { outline: 3px solid #7aa7ff
 .btn { background: var(--card); border: 0.5px solid #c7d3ec; border-radius: 10px; padding: 6px 12px; }
 .btn:hover { background: #eef3fd; }
 .btn.small { padding: 3px 10px; font-size: 12px; }
-.btn.primary { background: var(--acc); color: #fff; border-color: var(--acc); }
+.btn.primary { background: color-mix(in srgb, var(--acc) 78%, #000); color: #fff; border-color: color-mix(in srgb, var(--acc) 78%, #000); }
 .btn.primary:hover { filter: brightness(0.95); }
 .big-btn { padding: 10px 28px; font-size: 16px; margin-top: 6px; }
 .note { font-size: 12px; color: var(--muted); }
@@ -407,7 +407,7 @@ button, .st, .tday, .node, .info { touch-action: manipulation; }
 .quizres .ok { color: #1f8a5b; }
 .quizres .no { color: #b4483a; }
 .frame > .ov[style*="fixed"] { inset: 0; background: #14264d66; backdrop-filter: blur(3px); }
-.frame > .ov[style*="fixed"] .box { background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 40px #0004; max-height: 90vh; overflow: auto; }
+.frame > .ov[style*="fixed"] .box { background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 40px #0004; max-height: 90vh; max-height: 90dvh; overflow: auto; }
 .feat, .stop, .node { cursor: pointer; }
 
 /* ---- Readable map text on phones (the map scales down with the screen) ---- */
@@ -591,3 +591,8 @@ button.mb-brand:focus-visible { outline: 3px solid var(--acc, #1aa58a); outline-
 .chip.assist { background: #e3f7ee; color: #1b7a55; font-size: 11px; margin-left: 6px; }
 .factcard.assist { background: #e9f7f1; }
 @media (prefers-reduced-motion: reduce) { .lesson-pulse { animation: none; outline: 3px solid #ffb224; } }
+
+/* cues that do not depend on motion or color alone */
+.beat.flash { background: #43c58c; box-shadow: 0 0 0 10px #43c58c66; }
+.tile.hot { font-weight: 800; color: #fff; outline: 3px solid #fff; outline-offset: -5px; }
+.btn.pump { background: #1479c4; border-color: #1479c4; }

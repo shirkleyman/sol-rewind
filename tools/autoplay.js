@@ -43,7 +43,7 @@
         const ps = $$('.pt2:not(.decoy)')
           .map((p) => {
             const m = /translate\(([-\d.]+)px, ([-\d.]+)px\)/.exec(p.style.transform);
-            return m ? { x: +m[1] + 12, y: +m[2] } : null;
+            return m ? { x: (parseFloat(p.style.left) / 100) * rect.width, y: +m[2] } : null;
           })
           .filter(Boolean)
           .sort((a, b) => b.y - a.y);
@@ -51,6 +51,7 @@
         await sleep(30);
       }
     } else if (title === 'Match the plant cards') {
+      await sleep(1900); // the cards are shown first on easy levels
       const cards = $$('.cd');
       const face = {};
       const done = new Set();

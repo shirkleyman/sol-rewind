@@ -18,12 +18,17 @@ export const power: MiniGame = {
     const sn = q(el, '#sn');
     const zn = q(el, '#zn');
     const rd = q(el, '#rd');
-    const t0 = performance.now();
+    let last = performance.now();
+    let phase = 0;
+    let clock = 0;
     const frame = (t: number) => {
-      if (ctx.signal.aborted) return;
-      const s = (t - t0) / 1000;
-      pos = 0.5 + 0.5 * Math.sin(s * (speed + tries * 0.35));
-      center = drifts ? 0.5 + 0.18 * Math.sin(s * 0.9) : 0.5;
+      if (ctx.signal.aborted || !el.isConnected) return;
+      const dt = Math.min(0.05, Math.max(0, (t - last) / 1000));
+      last = t;
+      phase += dt * (speed + tries * 0.35);
+      clock += dt;
+      pos = 0.5 + 0.5 * Math.sin(phase);
+      center = drifts ? 0.5 + 0.18 * Math.sin(clock * 0.9) : 0.5;
       sn.style.left = `${pos * 100}%`;
       zn.style.left = `${(center - half) * 100}%`;
       zn.style.width = `${half * 200}%`;

@@ -94,7 +94,7 @@ describe('short levels and the bonus day', () => {
 
   it('the Earth cargo kit still gives a real head start on a short level', async () => {
     const { withKit } = await import('../src/core/kit');
-    const full = { battery: 2, water: 1, shield: 2, science: 1 };
+    const full = { battery: 2, water: 1, shield: 1, science: 1 };
     for (const l of LEVELS) {
       const k = withKit(l, full);
       expect(simulate(k, []).p).toBeGreaterThanOrEqual(Math.min(100, l.start.p));
@@ -177,7 +177,7 @@ describe('cargo kit', () => {
   it('a kit gives a head start and reduces storm radiation', async () => {
     const { withKit } = await import('../src/core/kit');
     const base = LEVELS[1];
-    const kitted = withKit(base, { battery: 2, water: 1, shield: 2, science: 1 });
+    const kitted = withKit(base, { battery: 2, water: 1, shield: 1, science: 1 });
     expect(simulate(kitted, []).p).toBe(Math.min(100, base.start.p + 20));
     expect(dayDose(kitted, 3, 0)).toBeLessThan(dayDose(base, 3, 0));
   });

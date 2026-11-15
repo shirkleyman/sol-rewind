@@ -28,7 +28,6 @@ export const shield: MiniGame = {
     const ar = q(el, '#ar');
     const sb = q(el, '#sb');
     const bl = q(el, '#bl');
-    const W = Math.max(240, ar.clientWidth);
     const H = Math.max(180, ar.clientHeight);
     const groundY = H - 38;
     const widthFrac = 0.34 - 0.12 * d;
@@ -86,7 +85,8 @@ export const shield: MiniGame = {
         if (moon) p.x += Math.sin(now / 520 + p.phase) * 0.06 * dt;
         if (windy) p.x += Math.sin(now / 900) * 0.07 * dt * (0.4 + d);
         p.x = Math.max(0.03, Math.min(0.97, p.x));
-        p.el.style.transform = `translate(${p.x * W - 12}px, ${p.y}px)`;
+        p.el.style.left = `${p.x * 100}%`;
+        p.el.style.transform = `translate(-12px, ${p.y}px)`;
         if (p.y >= groundY) {
           const hit = Math.abs(p.x - shieldX) <= widthFrac / 2 + 0.015;
           if (hit) {

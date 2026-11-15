@@ -20,7 +20,8 @@ export const rest: MiniGame = {
       later(() => {
         bt.classList.remove('pulse');
         void bt.offsetWidth;
-        bt.classList.add('pulse');
+        bt.classList.add('pulse', 'flash');
+        later(() => bt.classList.remove('flash'), 260, ctx.signal);
       }, lead + i * interval, ctx.signal);
     }
     q(el, '#tap').onclick = () => {
@@ -44,7 +45,7 @@ export const rest: MiniGame = {
 export const repair: MiniGame = {
   id: 'repair',
   title: 'Fix the wiring',
-  help: 'Tap each glowing red panel before it burns out.',
+  help: 'Tap each glowing red panel before it burns out. On a keyboard, press the number on the panel.',
   start(el, d, done, ctx) {
     const finish = once(done);
     const { total, gap, ttl } = P.repair(d);
@@ -52,13 +53,33 @@ export const repair: MiniGame = {
     let fixed = 0;
     el.innerHTML = `<div class="tiles">${Array.from({ length: 9 }, (_, i) => `<button class="btn tile" data-i="${i}" aria-label="Panel ${i + 1}"></button>`).join('')}</div><div class="note" id="fx" aria-live="polite">Fixed 0</div>`;
     const tiles = [...el.querySelectorAll<HTMLButtonElement>('.tile')];
-    tiles.forEach((t) => {
+    const stamp = new Map<HTMLButtonElement, number>();
+    const setHot = (t: HTMLButtonElement, on: boolean): void => {
+      t.classList.toggle('hot', on);
+      t.setAttribute('aria-label', `Panel ${tiles.indexOf(t) + 1}${on ? ', broken, fix it now' : ''}`);
+    };
+    const press = (t: HTMLButtonElement): void => {
+      if (!t.classList.contains('hot')) {
+        sfx.bad();
+        return;
+      }
+      setHot(t, false);
+      fixed++;
+      q(el, '#fx').textContent = `Fixed ${fixed}`;
+      sfx.good();
+    };
+    el.addEventListener('keydown', (e) => {
+      const n = Number(e.key);
+      if (n >= 1 && n <= 9) press(tiles[n - 1]);
+    });
+    tiles.forEach((t, i) => {
+      t.textContent = String(i + 1);
       t.onclick = () => {
         if (!t.classList.contains('hot')) {
           sfx.bad();
           return;
         }
-        t.classList.remove('hot');
+        setHot(t, false);
         fixed++;
         q(el, '#fx').textContent = `Fixed ${fixed}`;
         sfx.good();
@@ -73,8 +94,12 @@ export const repair: MiniGame = {
       spawned++;
       const idle = tiles.filter((t) => !t.classList.contains('hot'));
       const t = idle[Math.floor(Math.random() * idle.length)];
-      t.classList.add('hot');
-      later(() => t.classList.remove('hot'), ttl, ctx.signal);
+      setHot(t, true);
+      const mine = (stamp.get(t) ?? 0) + 1;
+      stamp.set(t, mine);
+      later(() => {
+        if (stamp.get(t) === mine) setHot(t, false);
+      }, ttl, ctx.signal);
       later(spawn, gap, ctx.signal);
     };
     later(spawn, 500, ctx.signal);

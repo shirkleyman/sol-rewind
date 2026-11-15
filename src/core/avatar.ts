@@ -72,4 +72,4 @@ export function activeHelmet(id: string, total: number): Helmet {
   return total >= h.need ? h : HELMETS[0];
 }
 
-export const cleanName = (raw: string): string => raw.replace(/[<>&"'`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 20);
+export const cleanName = (raw: string): string => raw.replace(/[<>&"`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 20);

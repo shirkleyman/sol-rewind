@@ -131,6 +131,7 @@ export const sensor: MiniGame = {
     let state: 'idle' | 'wait' | 'go' = 'idle';
     let t0 = 0;
     let round = 0;
+    let token = 0;
     el.innerHTML = `<div class="light" id="lt" aria-hidden="true"></div><div class="note" id="tx" aria-live="polite"></div><button class="btn big-btn" id="tap">Tap</button>`;
     const lt = q(el, '#lt');
     const tx = q(el, '#tx');
@@ -141,17 +142,20 @@ export const sensor: MiniGame = {
     };
     const next = () => {
       state = 'wait';
+      const my = ++token;
       lt.className = 'light';
       tx.textContent = `Round ${round + 1} of ${rounds}: wait for green...`;
       const decoy = Math.random() < sp.decoyChance;
       later(() => {
-        if (state !== 'wait') return;
+        if (state !== 'wait' || my !== token) return;
         if (decoy) {
           lt.className = 'light amber';
           later(() => {
-            if (state !== 'wait') return;
+            if (state !== 'wait' || my !== token) return;
             lt.className = 'light';
-            later(arm, 500, ctx.signal);
+            later(() => {
+              if (state === 'wait' && my === token) arm();
+            }, 500, ctx.signal);
           }, 500, ctx.signal);
         } else arm();
       }, 1200 + Math.random() * 2000, ctx.signal);
@@ -164,12 +168,14 @@ export const sensor: MiniGame = {
     q(el, '#tap').onclick = () => {
       if (state === 'wait') {
         state = 'idle';
+        token++;
         scores.push(0);
         tx.textContent = 'Too early!';
         sfx.bad();
         later(advance, 800, ctx.signal);
       } else if (state === 'go') {
         state = 'idle';
+        token++;
         const rt = performance.now() - t0;
         const { best, worst } = sp;
         scores.push(clamp(1 - (rt - best) / (worst - best)));

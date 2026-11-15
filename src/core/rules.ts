@@ -189,7 +189,8 @@ export function evaluate(level: LevelConfig, plan: Plan, carried: number): Evalu
   return { S, dose, failed, finished, stars };
 }
 
-export function rewindTo(level: LevelConfig, plan: Plan, k: number, carried: number): { plan: Plan; carried: number; lost: number } {
+export function rewindTo(level: LevelConfig, plan: Plan, kIn: number, carried: number): { plan: Plan; carried: number; lost: number } {
+  const k = Math.max(1, Math.min(Math.trunc(kIn) || 1, plan.length + 1));
   const S = simulate(level, plan);
   const lost = S.g.slice(k - 1).reduce((x, y) => x + y, 0);
   return { plan: plan.slice(0, k - 1), carried: carried + lost, lost };

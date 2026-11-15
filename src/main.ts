@@ -7,7 +7,7 @@ import { skillProgress } from './core/skills';
 import { STOPS } from './core/stops';
 import type { Stop } from './core/stops';
 import { LevelView, SKILL_ICON } from './ui/level';
-import { animateMap, currentLevel, isUnlocked, mapSvg, scrollMapToProgress } from './ui/map';
+import { animateMap, stopMapAnimations, currentLevel, isUnlocked, mapSvg, scrollMapToProgress } from './ui/map';
 import { icon } from './ui/icons';
 import { showCredits } from './ui/credits';
 import { playLaunch } from './ui/cutscene';
@@ -86,6 +86,7 @@ function showMap(focus: number | null = null, keepScroll = false): void {
   view?.destroy();
   view = null;
   const total = save.stars.slice(0, LEVELS.length + 1).reduce((a, b) => a + b, 0);
+  stopMapAnimations(root);
   root.innerHTML = `<div class="frame mapscreen"><div class="map-bar" role="toolbar" aria-label="Menu"><button class="mb-brand" id="brand" aria-label="Sol Rewind. Tap to see how to play"><span class="mb-logo" aria-hidden="true">${logoMark}</span><div class="mb-title"><span class="title">Sol <b>Rewind</b></span><span class="note mb-tag">Every day counts. Even the ones you undo.</span></div></button><div class="mb-right"><span class="chip" aria-label="Stars ${total} of ${(LEVELS.length + 1) * 3}">★ ${total} / ${(LEVELS.length + 1) * 3}</span><button class="btn small" id="skills" aria-label="Skills">${icon('bulb')}<span class="lbl"> Skills</span></button><button class="btn small" id="settings" aria-label="Settings">${icon('settings')}<span class="lbl"> Settings</span></button></div></div><div class="map-wrap">${mapSvg(save.stars, unlockAll, save.stops)}</div></div>`;
 
   const activate = (el: Element, fn: () => void): void => {
@@ -175,6 +176,9 @@ function showMap(focus: number | null = null, keepScroll = false): void {
     ov.querySelector<HTMLElement>('#set-reset')!.onclick = () => {
       if (confirm('Reset all progress on this device?')) {
         save = resetSave();
+        setSoundEnabled(save.sound);
+        music.setEnabled(save.music);
+        setVoice(save.voice);
         showMap();
       }
     };
@@ -202,6 +206,22 @@ function openOverlay(html: string, closeSel: string): HTMLElement {
   ov.querySelector<HTMLButtonElement>(closeSel)!.onclick = () => ov.remove();
   ov.style.position = 'fixed';
   ov.style.zIndex = '30';
+  const box = ov.querySelector<HTMLElement>('.box');
+  box?.setAttribute('role', 'dialog');
+  box?.setAttribute('aria-modal', 'true');
+  box?.setAttribute('aria-label', box.querySelector('h2')?.textContent ?? 'Dialog');
+  const onEsc = (e: KeyboardEvent): void => {
+    if (!ov.isConnected) {
+      document.removeEventListener('keydown', onEsc);
+      return;
+    }
+    if (e.key === 'Escape') {
+      document.removeEventListener('keydown', onEsc);
+      ov.querySelector<HTMLElement>(closeSel)?.click();
+    }
+  };
+  document.addEventListener('keydown', onEsc);
+  (ov.querySelector<HTMLElement>('.btn.primary') ?? ov.querySelector<HTMLElement>('button'))?.focus({ preventScroll: true });
   return ov;
 }
 

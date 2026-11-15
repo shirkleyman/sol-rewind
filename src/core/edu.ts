@@ -23,7 +23,7 @@ export const EDU: Record<EduKey, Edu> = {
     title: 'Power: the base needs energy',
     kid: 'Solar panels turn sunlight into electricity. A battery stores it so the base keeps running when it is dark. Every machine uses some power, so you decide where it goes.',
     real: 'The International Space Station has huge solar arrays and batteries, and engineers write a power budget for every spacecraft.',
-    game: 'Charging fills the battery. Water recycling, experiments and the shield all use power.',
+    game: 'Charging fills the battery. Water recycling, the shield and some experiments use power.',
   },
   water: {
     title: 'Water: use it again',

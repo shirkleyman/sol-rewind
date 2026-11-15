@@ -39,7 +39,7 @@ export const NAME_MAX = 20;
 
 /** Trims, collapses spaces, removes angle brackets and cuts to NAME_MAX characters. */
 export function cleanName(raw: string): string {
-  return raw.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, NAME_MAX).trim();
+  return raw.replace(/[<>&"`]/g, '').replace(/\s+/g, ' ').trim().slice(0, NAME_MAX).trim();
 }
 
 export function escapeHtml(s: string): string {

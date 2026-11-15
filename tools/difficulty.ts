@@ -194,7 +194,7 @@ function runLevel(level: LevelConfig, k: Skill, episodes = 400): { finish: numbe
 function reportLevels(): void {
   console.log('\nLEVELS (a sensible player, 400 plays each): finished / 2+ stars / 3 stars, average science and radiation');
   console.log('lvl | world | goal low | average kid                              | good kid');
-  const kit = process.env.KIT ? { battery: 2, water: 1, shield: 2, science: 1 } : null;
+  const kit = process.env.KIT ? { battery: 2, water: 1, shield: 1, science: 1 } : null;
   if (kit) console.log('(with a full Earth cargo kit: battery 2, water 1, shield 2, science 1)');
   for (const L0 of LEVELS) {
     const L = kit ? withKit(L0, kit) : L0;

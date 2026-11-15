@@ -30,7 +30,7 @@ import { surpriseFor } from '../core/surprises';
 import { runSurprise } from './surprise';
 import { heroHtml } from './hero';
 import type { HeroKind } from './hero';
-import { plain, speak, speakOnce, stopSpeaking, voiceSupported } from './voice';
+import { plain, resetSpoken, speak, speakOnce, stopSpeaking, voiceSupported } from './voice';
 
 export interface LevelHooks {
   onExit: () => void;
@@ -105,25 +105,49 @@ export class LevelView {
   private sAbort: AbortController | null = null;
   /** A sheet shown over the finish card: the postcard, the certificate, or the name form. */
   private sheet: 'postcard' | 'cert' | 'name' | null = null;
+  /** Set when the view is left, so a late timer or an await never draws over the next screen. */
+  private dead = false;
+  private lastW = 0;
+  private ovKey = '';
 
   constructor(private root: HTMLElement, private level: LevelConfig, private hooks: LevelHooks) {
     this.baseLevel = level;
   }
 
   private onResize = (): void => {
-    if (this.busy) return;
+    if (this.busy || this.dead) return;
     window.clearTimeout(this.resizeTimer);
     this.resizeTimer = window.setTimeout(() => {
-      if (!this.busy) this.render();
+      const a = document.activeElement;
+      const typing = a instanceof HTMLInputElement || a instanceof HTMLTextAreaElement;
+      // Only the day graph depends on the width. Rebuilding while a child types (the phone keyboard fires resize) would lose the text.
+      if (this.busy || this.dead || typing || this.sheet === 'name' || Math.abs(this.root.clientWidth - this.lastW) < 2) return;
+      this.render();
     }, 200);
   };
 
+  /** Escape closes the card that is open. */
+  private onKey = (e: KeyboardEvent): void => {
+    if (e.key !== 'Escape' || this.dead) return;
+    for (const sel of ['[data-act="postcard-close"]', '[data-act="sheet-close"]', '[data-act="rv-close"]', '[data-act="edu-close"]', '[data-act="close"]', '[data-act="dismiss"]']) {
+      const b = this.root.querySelector<HTMLElement>(sel);
+      if (b) {
+        b.click();
+        return;
+      }
+    }
+  };
+
   mount(): void {
+    resetSpoken();
     window.addEventListener('resize', this.onResize);
+    document.addEventListener('keydown', this.onKey);
     this.render();
   }
 
   destroy(): void {
+    this.dead = true;
+    document.removeEventListener('keydown', this.onKey);
     stopSpeaking();
     this.sAbort?.abort();
     this.abort?.abort();
@@ -164,6 +188,7 @@ export class LevelView {
   }
 
   private render(): void {
+    if (this.dead) return;
     const L = this.level;
     const T = L.theme;
     const { core, ev, coreDone, over } = this.status();
@@ -243,6 +268,18 @@ export class LevelView {
       ${timelineHtml({ ghost: ghostS, level: { ...L, days: Ldays }, plan: this.plan, today: this.today, S: ev.S, live, sel: this.sel, over, carried: this.carried, dose: ev.dose, px: this.root.clientWidth - 44 })}
       <div class="note" style="margin-top:6px">${icon('database')} Storm days use real NASA DONKI events. Costs and rewards are game numbers.</div></div>`;
 
+    this.lastW = this.root.clientWidth;
+    const dlg = this.root.querySelector<HTMLElement>('.ov .box');
+    if (dlg) {
+      dlg.setAttribute('role', 'dialog');
+      dlg.setAttribute('aria-modal', 'true');
+      const title = dlg.querySelector('h2')?.textContent ?? '';
+      dlg.setAttribute('aria-label', title);
+      if (title !== this.ovKey) {
+        this.ovKey = title;
+        (dlg.querySelector<HTMLElement>('.btn.primary') ?? dlg.querySelector<HTMLElement>('button'))?.focus({ preventScroll: true });
+      }
+    } else this.ovKey = '';
     this.bind(over);
     if (this.lesson === 'try') {
       this.root.querySelector('#rw')?.classList.add('lesson-pulse');
@@ -289,9 +326,10 @@ export class LevelView {
     const r = this.root;
     const on = (sel: string, fn: (e: Event) => void) => r.querySelectorAll<HTMLElement>(sel).forEach((el) => (el.onclick = fn));
     on('#back', () => this.exit());
-    on('#snd', () => {
+    on('#snd', (e) => {
       this.hooks.soundOn = this.hooks.onToggleSound();
-      this.render();
+      if (this.busy) (e.currentTarget as HTMLElement).innerHTML = icon(this.hooks.soundOn ? 'volume' : 'volumeOff');
+      else this.render();
     });
     on('[data-info]', (e) => {
       if (this.busy) return;
@@ -303,9 +341,10 @@ export class LevelView {
       this.eduKey = null;
       this.render();
     });
-    on('#mus', () => {
+    on('#mus', (e) => {
       this.hooks.musicOn = this.hooks.onToggleMusic();
-      this.render();
+      if (this.busy) (e.currentTarget as HTMLElement).innerHTML = icon(this.hooks.musicOn ? 'music' : 'musicOff');
+      else this.render();
     });
     on('#goals', () => {
       if (this.busy) return;
@@ -323,6 +362,8 @@ export class LevelView {
     on('#rw', () => {
       if (this.busy) return;
       const wasLesson = this.lesson === 'try';
+      this.reported = false;
+      this.sheet = null;
       this.ghost = this.plan.length ? this.plan.map((d) => d.slice()) : this.ghost;
       const out = rewindTo(this.level, this.plan, this.sel, this.carried);
       this.plan = out.plan;
@@ -355,10 +396,14 @@ export class LevelView {
       }
       this.endDay();
     });
-    on('#vox', () => {
+    on('#vox', (e) => {
       this.hooks.voiceOn = this.hooks.onToggleVoice();
       if (this.hooks.voiceOn) speak('Read aloud is on.');
-      this.render();
+      if (this.busy) {
+        const b = e.currentTarget as HTMLElement;
+        b.classList.toggle('on', this.hooks.voiceOn);
+        b.setAttribute('aria-pressed', String(this.hooks.voiceOn));
+      } else this.render();
     });
     on('[data-say]', (e) => {
       const box = (e.currentTarget as HTMLElement).closest('.box');
@@ -386,6 +431,7 @@ export class LevelView {
       this.render();
     });
     on('#win', () => {
+      if (this.busy) return;
       this.info = true;
       sfx.click();
       this.render();
@@ -667,8 +713,10 @@ export class LevelView {
     ch.style.left = `${br.left + br.width / 2 - sr.left}px`;
     sfx.step();
     await sleep(760);
+    if (this.dead) return;
 
     const game = gameFor(L, k, day);
+    this.abort?.abort();
     const ac = new AbortController();
     this.abort = ac;
     const storm = stormFor(L, day)?.intensity ?? 0;
@@ -685,6 +733,7 @@ export class LevelView {
     const factHtml = this.seenFacts.has(eduKey) ? '' : `<div class="factcard small">${icon('bulb')}<div>${EDU[eduKey].real}</div></div>`;
     this.seenFacts.add(eduKey);
     game.start(area, d, (score) => {
+      ac.abort();
       const stars = starsFromScore(score, d);
       const m = STAR_YIELD[stars];
       stars === 3 ? sfx.perfect() : stars === 2 ? sfx.good() : sfx.bad();
@@ -707,6 +756,7 @@ export class LevelView {
         pop.style.top = `${br.top - sc.top + 6}px`;
         scene.appendChild(pop);
         await sleep(900);
+        if (this.dead) return;
         this.today.push({ k, m });
         this.busy = false;
         this.abort = null;

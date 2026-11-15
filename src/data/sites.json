@@ -194,7 +194,7 @@
    "coords": {
     "text": "4.502° N, 135.623° E",
     "note": "Landing site (the lander never moved)",
-    "source": "Golombek et al., Lunar and Planetary Science Conference 2019 (not a NASA page, check before use)"
+    "source": "Golombek et al., Lunar and Planetary Science Conference 2019 (a scientific paper, not a NASA page)"
    },
    "photo": {
     "file": "insight.jpg",
@@ -217,7 +217,7 @@
    "coords": {
     "text": "4.5895° S, 137.4417° E",
     "note": "Landing site in Gale Crater",
-    "source": "Vasavada et al., Journal of Geophysical Research 2014 (not a NASA page, check before use)"
+    "source": "Vasavada et al., Journal of Geophysical Research 2014 (a scientific paper, not a NASA page)"
    },
    "photo": {
     "file": "curiosity.jpg",
@@ -262,7 +262,7 @@
    "when": "3 July 2021",
    "coords": {
     "text": "Jezero Crater, western edge of Isidis Planitia",
-    "note": "Region (exact coordinates still to be added from a NASA source)",
+    "note": "Landing region (no exact point given)",
     "source": "NASA NSSDCA, Mars 2020 Perseverance, https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-052A"
    },
    "photo": {
