@@ -75,7 +75,7 @@ export function mapSvg(stars: number[], all: boolean, stopsDone: string[]): stri
   s += `<rect x="14" y="950" width="230" height="34" rx="17" fill="#1aa58a"/><text class="pilltxt" x="129" y="973" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Moon: training</text>`;
   s += `<rect x="14" y="1700" width="150" height="34" rx="17" fill="#3b82c4"/><text class="pilltxt" x="89" y="1723" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Earth: launch</text>`;
   s += `<text class="maptxt" x="16" y="1480" fill="#5a6b92" font-size="13">Earth to the Moon:</text><text class="maptxt" x="16" y="1500" fill="#5a6b92" font-size="13">about 384,000 km</text>`;
-  s += `<text class="maptxt" x="16" y="680" fill="#5a6b92" font-size="13">Earth to Mars:</text><text class="maptxt" x="16" y="700" fill="#5a6b92" font-size="13">55 to 400 million km</text>`;
+  s += `<g class="dist" tabindex="0" role="button" aria-label="Earth to Mars, 55 to 400 million km. Why does the distance change?"><rect x="8" y="664" width="196" height="46" rx="10" fill="transparent"/><text class="maptxt" x="16" y="680" fill="#5a6b92" font-size="13">Earth to Mars:</text><text class="maptxt" x="16" y="700" fill="#5a6b92" font-size="13">55 to 400 million km</text><circle cx="180" cy="694" r="11" fill="#fff" stroke="#3b82c4" stroke-width="2"/><text x="180" y="699" text-anchor="middle" font-size="14" font-weight="700" fill="#3b82c4">i</text></g>`;
 
   for (const st of STOPS) {
     const [x, y] = STOP_POS[st.id];

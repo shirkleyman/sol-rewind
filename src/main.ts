@@ -19,6 +19,7 @@ import { bindNameForm, certificateHtml, nameFormHtml, printCertificate } from '.
 import { setVoice, voiceSupported } from './ui/voice';
 import { activeHelmet, totalStars as avatarTotal } from './core/avatar';
 import { heroHtml } from './ui/hero';
+import { bindOrbits, orbitsHtml } from './ui/orbits';
 import { showHowTo } from './ui/howto';
 import logoMark from './assets/logo-mark.svg?raw';
 import { avatarSvg, bindAvatarSheet, openAvatarSheetHtml } from './ui/avatar';
@@ -101,6 +102,7 @@ function showMap(focus: number | null = null, keepScroll = false): void {
   };
   root.querySelectorAll<SVGElement>('.node:not(.locked)').forEach((n) => activate(n, () => (Number(n.dataset.i) === 0 ? openPrep() : startLevel(Number(n.dataset.i)))));
   root.querySelectorAll<SVGElement>('.stop').forEach((n) => activate(n, () => openStop(n.dataset.stop!)));
+  root.querySelectorAll<SVGElement>('.dist').forEach((n) => activate(n, () => bindOrbits(openOverlay(orbitsHtml(), '#orb-close'))));
   root.querySelectorAll<SVGElement>('.feat').forEach((n) => activate(n, () => openOverlay(featureHtml(n.dataset.feat!), '#feat-close')));
 
   const openCredits = () => {

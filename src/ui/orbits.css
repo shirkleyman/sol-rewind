@@ -1,0 +1,23 @@
+.orbit-box { text-align: left; max-width: 520px; width: 100%; }
+.orbit-box h2 { margin: 2px 0 6px; font-size: 20px; }
+.orbit-svg { display: block; width: min(100%, 300px); margin: 0 auto; background: radial-gradient(#101b3d, #0b1430); border-radius: 18px; }
+.o-earth-path { fill: none; stroke: #4a6ab0; stroke-width: 1.2; stroke-dasharray: 3 4; }
+.o-mars-path { fill: none; stroke: #b4694a; stroke-width: 1.2; stroke-dasharray: 3 4; }
+.o-line { stroke-width: 2.4; stroke-linecap: round; }
+.o-sun { fill: #ffb224; filter: drop-shadow(0 0 6px #ffb224aa); }
+.o-earth { fill: #4aa3ff; stroke: #fff; stroke-width: 1.5; }
+.o-mars { fill: #e0693a; stroke: #fff; stroke-width: 1.5; }
+.o-lbl { fill: #dfe8ff; font-size: 11px; font-weight: 700; }
+.orbit-read { text-align: center; margin: 8px 0 4px; }
+.orbit-read b { font-size: 28px; color: var(--ink, #14264d); }
+.o-sub { font-size: 13px; color: var(--muted, #5a6b92); margin: 2px 0 6px; }
+.o-bar { height: 10px; border-radius: 999px; background: #e7edf8; overflow: hidden; }
+.o-bar i { display: block; height: 100%; width: 0; border-radius: 999px; }
+.o-ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted, #5a6b92); margin-top: 2px; }
+.orbit-why { margin: 8px 0 4px; padding-left: 18px; font-size: 14px; }
+.orbit-why li { margin: 3px 0; }
+.orbit-ctl { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+.o-time { display: flex; align-items: center; gap: 8px; font-size: 13px; flex: 1; min-width: 160px; }
+.o-time input { flex: 1; min-height: 32px; accent-color: var(--acc, #1aa58a); }
+.dist { cursor: pointer; }
+.dist:focus-visible { outline: 3px solid var(--acc, #1aa58a); }
